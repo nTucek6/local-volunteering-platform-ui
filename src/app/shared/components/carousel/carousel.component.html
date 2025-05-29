@@ -1,0 +1,16 @@
+<div class="carousel">
+  <div class="carousel-info">
+    <h3 class="carousel-title">{{ title }}</h3>
+    <p class="carousel-description">{{ description }}</p>
+  </div>
+  <div class="cards">
+    <ng-container *ngFor="let pet of list">
+      <app-card
+        [routerLink]="'/details/'+ pet.id"
+        [title]="pet.title"
+        [location]="pet.city"
+        [date]="pet.date"
+      ></app-card>
+    </ng-container>
+  </div>
+</div>
