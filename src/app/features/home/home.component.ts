@@ -5,11 +5,10 @@ import { EventDTO } from 'src/app/shared/dto/event.dto';
 import { EventService } from 'src/app/shared/services/event.service';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [CommonModule, CarouselComponent],
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+    selector: 'app-home',
+    imports: [CommonModule, CarouselComponent],
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
   actionsAPI: EventDTO[] = [];
