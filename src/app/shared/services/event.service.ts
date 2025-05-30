@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { EventDTO } from '../dto/event.dto';
 import { Observable } from 'rxjs';
 
@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment ';
 export class EventService {
   private apiUrl = `${environment.apiUrl}/event`;
 
-  constructor(private http: HttpClient) {}
+  private http: HttpClient = inject(HttpClient)
 
   getEventById(id: number): Observable<EventDTO[]> {
     return this.http.get<EventDTO[]>(`${this.apiUrl}/${id}`);

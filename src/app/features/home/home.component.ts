@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CarouselComponent } from '../../shared/components/carousel/carousel.component';
 import { EventDTO } from 'src/app/shared/dto/event.dto';
@@ -13,7 +13,10 @@ import { EventService } from 'src/app/shared/services/event.service';
 export class HomeComponent {
   actionsAPI: EventDTO[] = [];
 
-  constructor(private eventService: EventService) {}
+
+private eventService =  inject(EventService);
+
+  constructor() {}
 
   ngOnInit() {
     this.eventService.getEventById(1).subscribe((response) => {
