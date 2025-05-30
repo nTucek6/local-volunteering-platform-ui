@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SidebarComponent } from "./core/sidebar/sidebar.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     SidebarComponent,
     BrowserAnimationsModule,
     MatSidenavModule

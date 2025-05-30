@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CarouselComponent } from "../../shared/components/carousel/carousel.component";
+import { CarouselComponent } from '../../shared/components/carousel/carousel.component';
+import { EventDTO } from 'src/app/shared/dto/event.dto';
+import { EventService } from 'src/app/shared/services/event.service';
 
 @Component({
   selector: 'app-home',
@@ -10,58 +12,108 @@ import { CarouselComponent } from "../../shared/components/carousel/carousel.com
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  pets = [
+  actionsAPI: EventDTO[] = [];
+
+  constructor(private eventService: EventService) {}
+
+  ngOnInit() {
+    this.eventService.getEventById(1).subscribe((response) => {
+      this.actionsAPI = response;
+      console.log(response);
+    });
+  }
+
+  pets: EventDTO[] = [
     {
       id: 1,
       title: 'Pet adoption fair',
-      city: 'Zagreb',
-      date: '25.5.2025.',
+      location: 'Zagreb',
+      startDateTime: '25.5.2025.',
+      description: '',
+      volunteerCount: 5,
+      creatorId: 1,
+      category: 'PETS',
+      upvote: 0,
     },
     {
       id: 2,
       title: 'Dog Shelter Clean-up',
-      city: 'Osijek',
-      date: '1.6.2025.',
+      location: 'Osijek',
+      startDateTime: '1.6.2025.',
+      description: '',
+      volunteerCount: 5,
+      creatorId: 2,
+      category: 'PETS',
+      upvote: 0,
     },
-     {
+    {
       id: 3,
       title: 'Dog Shelter Clean-up',
-      city: 'Osijek',
-      date: '1.6.2025.',
+      location: 'Osijek',
+      startDateTime: '1.6.2025.',
+      description: '',
+      volunteerCount: 5,
+      creatorId: 3,
+      category: 'PETS',
+      upvote: 0,
     },
-     {
+    {
       id: 4,
       title: 'Dog Shelter Clean-up',
-      city: 'Osijek',
-      date: '1.6.2025.',
+      location: 'Osijek',
+      startDateTime: '1.6.2025.',
+      description: '',
+      volunteerCount: 5,
+      creatorId: 4,
+      category: 'PETS',
+      upvote: 0,
     },
   ];
 
- actions = [
+  actions: EventDTO[] = [
     {
       id: 5,
       title: 'Comunity Garden Day',
-      city: 'Varaždin',
-      date: '29.5.2025.',
+      location: 'Varaždin',
+      startDateTime: '29.5.2025.',
+      description: '',
+      volunteerCount: 5,
+      creatorId: 5,
+      category: 'COMUNITY',
+      upvote: 0,
     },
     {
       id: 6,
       title: 'Senior Tech Support',
-      city: 'Rijeka',
-      date: '1.6.2025.',
+      location: 'Rijeka',
+      startDateTime: '1.6.2025.',
+      description: '',
+      volunteerCount: 5,
+      creatorId: 6,
+      category: 'OTHER',
+      upvote: 0,
     },
-     {
+    {
       id: 7,
       title: 'Neighborhood Cleanup',
-      city: 'Rijeka',
-      date: '12.6.2025.',
+      location: 'Rijeka',
+      startDateTime: '12.6.2025.',
+      description: '',
+      volunteerCount: 5,
+      creatorId: 7,
+      category: 'COMUNITY',
+      upvote: 0,
     },
-     {
+    {
       id: 8,
       title: 'Help the homeless',
-      city: 'Split',
-      date: '20.6.2025.',
+      location: 'Split',
+      startDateTime: '20.6.2025.',
+      description: '',
+      volunteerCount: 5,
+      creatorId: 8,
+      category: 'PEOPLE',
+      upvote: 0,
     },
   ];
-
 }
