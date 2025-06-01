@@ -27,6 +27,6 @@ export class LoginComponent {
   password: string = '';
 
   formSubmit() {
-    this.router.navigate(['dashboard']);
+    this.router.navigate(['']);
   }
 }

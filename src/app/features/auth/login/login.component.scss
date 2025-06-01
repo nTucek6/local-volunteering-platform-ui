@@ -33,7 +33,7 @@
   font-size: 16px;
 }
 
-.main-container > button,
+.main-container button,
 a {
   border-radius: 10px;
 }
@@ -73,8 +73,9 @@ a {
   justify-content: space-between;
 }
 
-.other-option > * {
+.other-option > a {
   width: 100%;
+  color: white !important;
 }
 
 .other-option > a:first-of-type {

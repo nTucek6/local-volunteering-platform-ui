@@ -11,7 +11,9 @@ import { EventService } from 'src/app/shared/services/event.service';
     styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  actionsAPI: EventDTO[] = [];
+  actionsAPI: EventDTO | null = null;
+
+  eventsPets: EventDTO[] = [];
 
 
 private eventService =  inject(EventService);
@@ -19,10 +21,16 @@ private eventService =  inject(EventService);
   constructor() {}
 
   ngOnInit() {
-    this.eventService.getEventById(1).subscribe((response) => {
+    /*this.eventService.getEventById(1).subscribe((response) => {
       this.actionsAPI = response;
       console.log(response);
-    });
+    }); */
+
+    this.eventService.getAllEvents(1, 5, '1.6.2025.', false).subscribe((response) =>{
+      this.eventsPets = response;
+      console.log(response);
+    })
+
   }
 
   pets: EventDTO[] = [
