@@ -1,10 +1,12 @@
+import { EventCategory } from "../model/event-category";
+
 export type EventDTO = {
   id: number;
-  category: string;
+  category: EventCategory;
   title: string;
   description: string;
   location: string;
-  startDateTime: string;
+  startDateTime: Date;
   upvote: number;
   creatorId: number;
   volunteerCount: number;

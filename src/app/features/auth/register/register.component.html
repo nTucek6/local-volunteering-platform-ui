@@ -1,1 +1,63 @@
-<p>register works!</p>
+<div class="main-container">
+  <h1 class="title">Local Volunteer Platform</h1>
+  <h2>Login/register or continue as guest</h2>
+  <p>Fill out the form below</p>
+  <form (ngSubmit)="formSubmit()" id="register-form" autocomplete="auto">
+    <mat-form-field class="form-group">
+      <input
+        type="email"
+        matInput
+        name="email"
+        placeholder="Email"
+        [(ngModel)]="email"
+        autocomplete="auto"
+      />
+    </mat-form-field>
+    <mat-form-field class="form-group">
+      <input
+        type="password"
+        matInput
+        name="password"
+        placeholder="Password"
+        [(ngModel)]="password"
+        autocomplete="auto"
+      />
+    </mat-form-field>
+        <mat-form-field class="form-group">
+      <input
+        type="password"
+        matInput
+        name="confirm-password"
+        placeholder="Confirm Password"
+        [(ngModel)]="confirmPassword"
+        autocomplete="auto"
+      />
+    </mat-form-field>
+        <mat-form-field class="form-group">
+      <input
+        type="text"
+        matInput
+        name="firstname"
+        placeholder="Firstname"
+        [(ngModel)]="firstname"
+        autocomplete="auto"
+      />
+    </mat-form-field>
+        <mat-form-field class="form-group">
+      <input
+        type="text"
+        matInput
+        name="lastname"
+        placeholder="Lastname"
+        [(ngModel)]="lastname"
+        autocomplete="auto"
+      />
+    </mat-form-field>
+    <button type="submit" class="login-btn" mat-button>Register</button>
+  </form>
+  <p class="divider">or register/continue as guest</p>
+  <div class="other-option">
+    <a routerLink="/" mat-button>Continue as guest</a>
+    <a routerLink="/login" mat-button>Login</a>
+  </div>
+</div>

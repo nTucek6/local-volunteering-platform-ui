@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { EventDTO } from '../dto/event.dto';
 import { Observable } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
+import { EventFilterParams } from '../model/event-filter-params';
 
 import { environment } from 'src/environments/environment ';
 
@@ -21,14 +22,27 @@ export class EventService {
   getAllEvents(
     page: number,
     size: number,
-    sortBy: string,
-    ascending: boolean
+    eventFilterParams?: EventFilterParams,
+    ascending?: boolean,
+    sortBy?: string,
   ): Observable<EventDTO[]> {
-    const params = new HttpParams()
+    let params = new HttpParams()
       .set('page', page.toString())
-      .set('size', size.toString())
-      .set('sortBy', sortBy)
-      .set('ascending', ascending.toString());
+      .set('size', size.toString());
+    if (sortBy != undefined) {
+      params = params.set('sortBy', sortBy);
+    }
+    if (ascending != undefined) {
+      params = params.set('ascending', ascending.toString());
+    }
+
+    if (eventFilterParams != undefined) {
+      Object.entries(eventFilterParams).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          params = params.set(key, value.toString());
+        }
+      });
+    }
     return this.http.get<EventDTO[]>(`${this.apiUrl}`, { params });
   }
 

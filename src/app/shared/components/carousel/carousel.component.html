@@ -4,12 +4,12 @@
     <p class="carousel-description">{{ description }}</p>
   </div>
   <div class="cards">
-    <ng-container *ngFor="let pet of list">
+    <ng-container *ngFor="let item of list">
       <app-card
-        [routerLink]="'/details/'+ pet.id"
-        [title]="pet.title"
-        [location]="pet.city"
-        [date]="pet.date"
+        [routerLink]="'/details/'+ item.id"
+        [title]="item.title"
+        [location]="item.location"
+        [date]="formatDate(item.startDateTime)"
       ></app-card>
     </ng-container>
   </div>
