@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common';
 import { SearchEventDto } from 'src/app/shared/dto/search-event.dto';
 import { MatTableModule } from '@angular/material/table';
 import { Router, RouterLink } from '@angular/router';
+import {MatTimepickerModule} from '@angular/material/timepicker';
 
 @Component({
   selector: 'app-search',
@@ -28,6 +29,7 @@ import { Router, RouterLink } from '@angular/router';
     DatePipe,
     MatTableModule,
     RouterLink,
+    MatTimepickerModule,
   ],
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
@@ -91,4 +93,9 @@ export class SearchComponent {
   selectedDate: Date = new Date();
 
   formSubmit() {}
+
+  navigateToDetails(eventId:number){
+    this.route.navigate(['/details/'+eventId])
+  }
+
 }

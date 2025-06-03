@@ -12,4 +12,5 @@ export class CardComponent {
  @Input () title? : string;
  @Input () location? : string;
  @Input () date? : string;
+ @Input () imagePath? : string = 'https://material.angular.dev/assets/img/examples/shiba2.jpg';
 }

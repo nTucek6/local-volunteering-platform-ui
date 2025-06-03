@@ -1,0 +1,38 @@
+.description{
+    color: #454545;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.container{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.time-place-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: fit-content;
+    border-radius: 10px;
+    padding: 2px 15px 2px 2px;
+    background-color: lightgray;
+    margin-bottom: 10px;
+    justify-content: flex-start;
+}
+
+.images > img{
+    height: 232px;
+    width: 232px;
+    margin-right: 20px;
+    border-radius: 15px;
+}
+
+.details{
+    border-bottom: 2px solid lightgray;
+    margin-top: 30px;
+}
+
+.details > p {
+    padding-bottom: 5px;
+}

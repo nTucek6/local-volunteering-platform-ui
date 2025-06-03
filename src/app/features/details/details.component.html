@@ -1,1 +1,53 @@
-<p>Action Id: {{actionId}}</p>
+<div>
+  <h1>{{ event?.title }}</h1>
+  <p class="description">{{ event?.description }}</p>
+  <div class="container">
+    <div class="time-place-container">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Search icon"
+        fontIcon="location_on"
+      ></mat-icon>
+      <p>Zagreb</p>
+    </div>
+    <div class="time-place-container">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Search icon"
+        fontIcon="access_time"
+      ></mat-icon>
+      <p>{{ event?.startDateTime | date : "dd.MM.yyyy. HH:mm" }}</p>
+    </div>
+    <div class="time-place-container">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Search icon"
+        fontIcon="place"
+      ></mat-icon>
+      <p>{{ event?.location }}</p>
+    </div>
+  </div>
+
+  <div class="images">
+    <ng-container *ngFor="let path of images">
+      <img [src]="path" />
+    </ng-container>
+  </div>
+
+  <div class="details">
+    <h4>Details</h4>
+    <p>
+      Ut vitae lacinia ipsum. Sed convallis gravida erat sodales aliquam. Nam
+      iaculis nunc enim, viverra pellentesque metus fringilla non. Mauris
+      finibus erat nunc, quis varius erat sollicitudin id. Donec hendrerit purus
+      non nibh euismod lobortis. Etiam ultrices ultricies ipsum at varius.
+      Vivamus velit odio, semper at turpis non, vehicula molestie leo. Morbi
+      tortor massa, ullamcorper nec lorem nec, feugiat vestibulum metus.
+      Maecenas luctus scelerisque lacinia. Praesent bibendum in neque ut
+      malesuada. Vestibulum pharetra lacinia eleifend. Donec ultricies mi
+      tincidunt tempor vulputate. Vivamus sed urna at felis ultrices sagittis.
+      Nam tempus est in nunc pulvinar egestas. Mauris aliquet tortor eu massa
+      condimentum, ut facilisis nisl finibus.
+    </p>
+  </div>
+</div>
