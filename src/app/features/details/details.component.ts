@@ -4,12 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 import { EventDTO } from 'src/app/shared/dto/event.dto';
 import { EventCategory } from 'src/app/shared/model/event-category';
 import { MatIconModule } from '@angular/material/icon';
-import { CarouselComponent } from 'src/app/shared/components/carousel/carousel.component';
 import { EventService } from 'src/app/shared/services/event.service';
 
 @Component({
     selector: 'app-details',
-    imports: [CommonModule, MatIconModule, CarouselComponent],
+    imports: [CommonModule, MatIconModule],
     templateUrl: './details.component.html',
     styleUrls: ['./details.component.scss']
 })

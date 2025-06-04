@@ -6,6 +6,7 @@ import { HttpParams } from '@angular/common/http';
 import { EventFilterParams } from '../model/event-filter-params';
 
 import { environment } from 'src/environments/environment ';
+import { HomePageDto, HomePageResponse } from '../dto/home-page.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,7 @@ export class EventService {
     size: number,
     eventFilterParams?: EventFilterParams,
     ascending?: boolean,
-    sortBy?: string,
+    sortBy?: string
   ): Observable<EventDTO[]> {
     let params = new HttpParams()
       .set('page', page.toString())
@@ -44,6 +45,10 @@ export class EventService {
       });
     }
     return this.http.get<EventDTO[]>(`${this.apiUrl}`, { params });
+  }
+
+  getEventsForHomePage(): Observable<HomePageResponse> {
+    return this.http.get<HomePageResponse>(`${this.apiUrl}/home`);
   }
 
   deleteEvent(id: number): Observable<void> {

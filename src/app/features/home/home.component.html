@@ -1,15 +1,9 @@
-<div class="app-carousel">
-  <app-carousel
-    [list]="eventsPets"
-    title="Pets"
-    description="Helping the mans friend"
-  ></app-carousel>
-</div>
 
-<div class="app-carousel">
+
+<div class="app-carousel" *ngFor="let category of events | keyvalue">
   <app-carousel
-    [list]="eventsCommunity"
-    title="Actions"
-    description="Helping the society"
+    [list]="category.value"
+    [title]="category.key | titlecase"
+    description="Helping the mans friend"
   ></app-carousel>
 </div>
