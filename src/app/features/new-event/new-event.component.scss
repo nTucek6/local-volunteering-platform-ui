@@ -1,0 +1,35 @@
+.main-container,
+#new-event-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#new-event-form {
+  min-width: 150px;
+  max-width: 350px;
+  width: 100%;
+}
+
+.form-group {
+  width: 100%;
+}
+
+.save-btn {
+  width: 100%;
+  color: white !important;
+  background-color: #000000;
+}
+
+#image-preview{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    gap: 10px;
+}
+
+#image-preview img {
+  height: 250px;
+  width: 250px;
+}

@@ -39,6 +39,7 @@ export class DetailsComponent {
         upvote: 5,
         creatorId: 1,
         volunteerCount: 10,
+        images: [],
     }
       this.eventService
       .getAllEvents(0, 5, { category: EventCategory.PETS})

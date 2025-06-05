@@ -39,6 +39,14 @@ const routes: Routes = [
             (m) => m.DetailsComponent
           ),
       },
+      {
+        path: 'new-event',
+        title: 'New event',
+        loadComponent: () =>
+          import('./features/new-event/new-event.component').then(
+            (m) => m.NewEventComponent
+          ),
+      },
     ],
   },
   {

@@ -1,4 +1,5 @@
 import { EventCategory } from "../model/event-category";
+import { EventImage } from "../model/event-image";
 
 export type EventDTO = {
   id: number;
@@ -10,4 +11,5 @@ export type EventDTO = {
   upvote: number;
   creatorId: number;
   volunteerCount: number;
+  images: EventImage[];
 };
