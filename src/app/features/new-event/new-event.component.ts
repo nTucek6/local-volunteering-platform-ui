@@ -17,6 +17,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { EventCategory } from 'src/app/shared/model/event-category';
 import { MatSelectModule } from '@angular/material/select';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { EventService } from 'src/app/shared/services/event.service';
+import { NewEventDto } from 'src/app/shared/dto/new-event.dto';
 
 @Component({
   selector: 'app-new-event',
@@ -38,6 +40,8 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 export class NewEventComponent {
   @ViewChild('autosize') autosize: CdkTextareaAutosize | undefined;
 
+  private eventService = inject(EventService);
+
   selectedImages: File[] = [];
   imagePreviews: string[] = [];
 
@@ -48,6 +52,7 @@ export class NewEventComponent {
   selectedDate: Date = new Date();
   selectedTitle: string = '';
   selectedDescription: string = '';
+  selectedDetails: string = '';
   selectedAddress: string = '';
 
   private _injector = inject(Injector);
@@ -79,5 +84,22 @@ export class NewEventComponent {
     this.imagePreviews.splice(index, 1);
   }
 
-  formSubmit() {}
+  formSubmit() {
+    if (this.selectedCategory != null) {
+      const newEventDTO: NewEventDto = {
+        category: this.selectedCategory,
+        title: this.selectedTitle,
+        description: this.selectedDescription,
+        details: this.selectedDetails,
+        location: this.selectedLocation,
+        address: this.selectedAddress,
+        startDateTime: this.selectedDate,
+        creatorId: 1,
+        images: this.selectedImages,
+      };
+      this.eventService
+        .createEvent(newEventDTO)
+        .subscribe((response) => console.log(response));
+    }
+  }
 }

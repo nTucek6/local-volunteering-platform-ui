@@ -14,7 +14,7 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field class="form-group">
-      <mat-label>Location</mat-label>
+      <mat-label>Title</mat-label>
       <input
         type="text"
         matInput
@@ -32,9 +32,23 @@
         matInput
         cdkTextareaAutosize
         #autosize="cdkTextareaAutosize"
-        name="Description..."
-        placeholder="description"
+        name="description"
+        placeholder="Description..."
         [(ngModel)]="selectedDescription"
+        autocomplete="auto"
+        [ngModelOptions]="{ standalone: true }"
+      ></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="form-group">
+      <mat-label>Details</mat-label>
+      <textarea
+        matInput
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        name="details..."
+        placeholder="Details..."
+        [(ngModel)]="selectedDetails"
         autocomplete="auto"
         [ngModelOptions]="{ standalone: true }"
       ></textarea>
@@ -92,22 +106,7 @@
       <mat-timepicker #timepicker />
       <mat-timepicker-toggle [for]="timepicker" matSuffix />
     </mat-form-field>
-    <!--  <mat-form-field class="form-group">
-      <mat-label>Address</mat-label>
-      <input
-        type="file"
-        matInput
-        name="image"
-        placeholder="Upload images"
-        [(ngModel)]="selectedAddress"
-        (change)="onFileSelected($event)"
-        multiple
-        accept="image/*"
-        autocomplete="auto"
-        [ngModelOptions]="{ standalone: true }"
-      />
-    </mat-form-field> -->
-    <div class="form-group">
+    <div class="form-group input-image">
       <input
         type="file"
         name="image"
@@ -120,7 +119,10 @@
     </div>
     <button type="submit" class="save-btn" mat-button>Create</button>
   </form>
-  <div id="image-preview">
+  <div
+    id="image-preview"
+    [ngStyle]="{ 'margin-bottom': selectedImages.length > 0 ? '200px' : '0' }"
+  >
     <ng-container *ngFor="let path of imagePreviews; let i = index">
       <img [src]="path" alt="Image preview" (click)="removeImage(i)" />
     </ng-container>

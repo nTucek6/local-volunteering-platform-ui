@@ -5,6 +5,10 @@
   align-items: center;
 }
 
+.main-container > .title {
+  margin-bottom: 30px;
+}
+
 #new-event-form {
   min-width: 150px;
   max-width: 350px;
@@ -15,18 +19,23 @@
   width: 100%;
 }
 
+.input-image {
+  margin: 20px 0;
+}
+
 .save-btn {
   width: 100%;
   color: white !important;
   background-color: #000000;
 }
 
-#image-preview{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-top: 30px;
-    gap: 10px;
+#image-preview {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  gap: 10px;
+  margin-bottom: 200px;
 }
 
 #image-preview img {

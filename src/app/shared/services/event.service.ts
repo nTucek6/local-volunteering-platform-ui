@@ -7,6 +7,8 @@ import { EventFilterParams } from '../model/event-filter-params';
 
 import { environment } from 'src/environments/environment ';
 import { HomePageDto, HomePageResponse } from '../dto/home-page.dto';
+import { SearchEventDto } from '../dto/search-event.dto';
+import { NewEventDto } from '../dto/new-event.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +28,7 @@ export class EventService {
     eventFilterParams?: EventFilterParams,
     ascending?: boolean,
     sortBy?: string
-  ): Observable<EventDTO[]> {
+  ): Observable<SearchEventDto[]> {
     let params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
@@ -44,7 +46,7 @@ export class EventService {
         }
       });
     }
-    return this.http.get<EventDTO[]>(`${this.apiUrl}`, { params });
+    return this.http.get<SearchEventDto[]>(`${this.apiUrl}`, { params });
   }
 
   getEventsForHomePage(): Observable<HomePageResponse> {
@@ -53,5 +55,24 @@ export class EventService {
 
   deleteEvent(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  createEvent(newEventDto: NewEventDto): Observable<EventDTO> {
+    const formData = new FormData();
+
+    formData.append('category', newEventDto.category);
+    formData.append('title', newEventDto.title);
+    formData.append('description', newEventDto.description);
+    formData.append('details', newEventDto.details);
+    formData.append('location', newEventDto.location);
+    formData.append('address', newEventDto.address);
+    formData.append('startDateTime', newEventDto.startDateTime.toISOString());
+    formData.append('creatorId', newEventDto.creatorId.toString());
+
+    newEventDto.images.forEach((file: File) => {
+      formData.append('images', file);
+    });
+
+    return this.http.post<EventDTO>(`${this.apiUrl}`, formData);
   }
 }

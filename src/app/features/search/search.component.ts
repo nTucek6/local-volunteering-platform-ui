@@ -1,4 +1,10 @@
-import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  inject,
+  Inject,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -13,7 +19,10 @@ import { DatePipe } from '@angular/common';
 import { SearchEventDto } from 'src/app/shared/dto/search-event.dto';
 import { MatTableModule } from '@angular/material/table';
 import { Router, RouterLink } from '@angular/router';
-import {MatTimepickerModule} from '@angular/material/timepicker';
+import { MatTimepickerModule } from '@angular/material/timepicker';
+import { EventFilterParams } from 'src/app/shared/model/event-filter-params';
+import { EventService } from 'src/app/shared/services/event.service';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-search',
@@ -30,6 +39,7 @@ import {MatTimepickerModule} from '@angular/material/timepicker';
     MatTableModule,
     RouterLink,
     MatTimepickerModule,
+    MatIcon
   ],
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
@@ -38,8 +48,15 @@ import {MatTimepickerModule} from '@angular/material/timepicker';
 })
 export class SearchComponent {
   private route = inject(Router);
+  private eventService = inject(EventService);
+  private cdr = inject(ChangeDetectorRef);
 
   eventCategories = Object.values(EventCategory);
+  eventsDto: SearchEventDto[] = [];
+
+  page: number = 0;
+  size: number = 10;
+  ascending: boolean = false;
 
   displayedColumns: string[] = [
     'location',
@@ -49,7 +66,7 @@ export class SearchComponent {
     'owner',
   ];
 
-  eventsDto: SearchEventDto[] = [
+  /*eventsDto: SearchEventDto[] = [ 
     {
       id: 1,
       category: EventCategory.PETS,
@@ -59,7 +76,7 @@ export class SearchComponent {
       creatorId: 1,
       creatorProfileImageURL: 'https://randomuser.me/api/portraits/men/1.jpg',
     },
-        {
+    {
       id: 1,
       category: EventCategory.PETS,
       title: 'TITLE',
@@ -68,7 +85,7 @@ export class SearchComponent {
       creatorId: 1,
       creatorProfileImageURL: 'https://randomuser.me/api/portraits/men/1.jpg',
     },
-        {
+    {
       id: 1,
       category: EventCategory.PETS,
       title: 'TITLE',
@@ -77,7 +94,7 @@ export class SearchComponent {
       creatorId: 1,
       creatorProfileImageURL: 'https://randomuser.me/api/portraits/men/1.jpg',
     },
-        {
+    {
       id: 1,
       category: EventCategory.PETS,
       title: 'TITLE',
@@ -87,15 +104,40 @@ export class SearchComponent {
       creatorProfileImageURL: 'https://randomuser.me/api/portraits/men/1.jpg',
     },
   ];
+  */
 
   selectedLocation: string = '';
   selectedCategory?: EventCategory;
   selectedDate: Date = new Date();
+  selectedTitle: string = '';
 
-  formSubmit() {}
+  formSubmit() {
+    const eventFilterParams: EventFilterParams = {
+      category: this.selectedCategory,
+      location: this.selectedLocation,
+      title: this.selectedTitle,
+    };
 
-  navigateToDetails(eventId:number){
-    this.route.navigate(['/details/'+eventId])
+    this.eventService
+      .getAllEvents(
+        this.page,
+        this.size,
+        eventFilterParams,
+        this.ascending,
+        //this.selectedDate.toDateString()
+      )
+      .subscribe((response) => {
+        this.eventsDto = [...response];
+        this.cdr.markForCheck();
+      });
+  }
+
+  navigateToDetails(eventId: number) {
+    this.route.navigate(['/details/' + eventId]);
+  }
+
+  clearCategory(){
+    this.selectedCategory = undefined;
   }
 
 }
