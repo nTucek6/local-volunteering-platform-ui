@@ -1,1 +1,19 @@
-<p>profile works!</p>
+<div id="profile-container">
+  <div id="top-background"></div>
+  <div class="profile-content">
+    <div class="profile-image">
+      <img src="https://randomuser.me/api/portraits/men/1.jpg" />
+      <div>
+        <h3>Full name</h3>
+        <p>User name</p>
+      </div>
+    </div>
+
+    <nav class="nav">
+        <a [routerLink]="`/profile/${id}`" >Overview</a>
+        <a routerLink="volunteer-history" >Volunteer history</a>
+        <a routerLink="my-events" >My events</a>
+    </nav>
+
+  </div>
+</div>

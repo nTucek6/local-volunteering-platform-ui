@@ -1,0 +1,45 @@
+#top-background {
+  background-color: #414040;
+  height: 120px;
+  opacity: 0.2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+}
+
+.profile-content {
+  margin-top: 120px;
+}
+
+.profile-image {
+  margin-top: -60px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.profile-image > img {
+  border-radius: 50%;
+}
+
+.profile-image > div:first-of-type {
+  margin-left: 15px;
+}
+
+.nav {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  width: 500px;
+  justify-content: space-between;
+}
+
+.nav a {
+    text-decoration: none;
+    color: black;
+}
