@@ -1,14 +1,14 @@
 <div class="main-container">
-  <h1 class="title">Local Volunteer Platform</h1>
-  <h2>Login/register or continue as guest</h2>
-  <p>Enter your email and password to login</p>
+  <h1 class="title">{{ "title" | translate }}</h1>
+  <h2>{{ "auth.subtitle" | translate }}</h2>
+  <p>{{ "auth.login_instruction" | translate }}</p>
   <form (ngSubmit)="formSubmit()" id="login-form" autocomplete="auto">
     <mat-form-field class="form-group">
       <input
         type="email"
         matInput
         name="email"
-        placeholder="Email"
+        [placeholder]="'auth.email' | translate"
         [(ngModel)]="email"
         autocomplete="auto"
       />
@@ -18,16 +18,16 @@
         type="password"
         matInput
         name="password"
-        placeholder="Password"
+       [placeholder]="'auth.password' | translate"
         [(ngModel)]="password"
         autocomplete="auto"
       />
     </mat-form-field>
-    <button type="submit" class="login-btn" mat-button>Login</button>
+    <button type="submit" class="login-btn" mat-button>{{ "auth.login" | translate }}</button>
   </form>
-  <p class="divider">or register/continue as guest</p>
+  <p class="divider">{{ "auth.or_register_guest" | translate }}</p>
   <div class="other-option">
-    <a routerLink="/" mat-button>Continue as guest</a>
-    <a routerLink="/register" mat-button>Register</a>
+    <a routerLink="/" mat-button>{{ "auth.guest" | translate }}</a>
+    <a routerLink="/register" mat-button>{{ "auth.register" | translate }}</a>
   </div>
 </div>

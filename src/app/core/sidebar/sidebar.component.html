@@ -1,14 +1,52 @@
 <div id="sidebar">
-  <h4 id="app-title">{{ title }}</h4>
+  <h4 id="app-title">{{ "title" | translate }}</h4>
   <div class="nav-items">
-    <h5 class="nav-items-title">Discover</h5>
-    <a routerLink="/"><mat-icon aria-hidden="false" aria-label="Home icon" fontIcon="home"></mat-icon>Home</a>
-    <a routerLink="/search"><mat-icon aria-hidden="false" aria-label="Search icon" fontIcon="search"></mat-icon>Search</a>
+    <h5 class="nav-items-title">{{ "sidebar.discover" | translate }}</h5>
+    <a routerLink="/"
+      ><mat-icon
+        aria-hidden="false"
+        aria-label="Home icon"
+        fontIcon="home"
+      ></mat-icon
+      >{{ "sidebar.home" | translate }}</a
+    >
+    <a routerLink="/search"
+      ><mat-icon
+        aria-hidden="false"
+        aria-label="Search icon"
+        fontIcon="search"
+      ></mat-icon
+      >{{ "sidebar.search" | translate }}</a
+    >
   </div>
   <div class="nav-items">
-    <h5 class="nav-items-title">Settings</h5>
-    <a routerLink="/profile/1"><mat-icon aria-hidden="false" aria-label="Person icon" fontIcon="person"></mat-icon>Profile</a>
-    <a routerLink="/new-event/"><mat-icon aria-hidden="false" aria-label="Person icon" fontIcon="person"></mat-icon>New event</a>
-    <a routerLink="/login"><mat-icon>exit_to_app</mat-icon>Logout</a>
+    <button (click)="onLanguageChange('hr')">
+      {{ "language.croatian" | translate }}
+    </button>
+    <button (click)="onLanguageChange('en')">
+      {{ "language.english" | translate }}
+    </button>
+  </div>
+  <div class="nav-items">
+    <h5 class="nav-items-title">{{ "sidebar.settings" | translate }}</h5>
+    <a routerLink="/profile/1"
+      ><mat-icon
+        aria-hidden="false"
+        aria-label="Person icon"
+        fontIcon="person"
+      ></mat-icon
+      >{{ "sidebar.profile" | translate }}</a
+    >
+    <a routerLink="/new-event/"
+      ><mat-icon
+        aria-hidden="false"
+        aria-label="Person icon"
+        fontIcon="person"
+      ></mat-icon
+      >{{ "sidebar.new_event" | translate }}</a
+    >
+    <a routerLink="/login"
+      ><mat-icon>exit_to_app</mat-icon>{{ "sidebar.logout" | translate }}</a
+    >
   </div>
 </div>

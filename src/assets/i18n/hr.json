@@ -1,0 +1,34 @@
+{
+  "language": {
+    "croatian": "Hrvatski",
+    "english": "Engleski"
+  },
+
+  "title": "Lokalna Platforma Volontera",
+
+  "sidebar": {
+    "discover": "Istraži",
+    "home": "Početna",
+    "search": "Pretraži",
+    "settings": "Postavke",
+    "profile": "Profil",
+    "new_event": "Novi događaj",
+    "logout": "Odjava"
+  },
+  "auth": {
+    "subtitle": "Prijavite se / registrirajte ili nastavite kao gost",
+    "login_instruction": "Unesite svoju e-poštu i lozinku za prijavu",
+    "email": "E-pošta",
+    "password": "Lozinka",
+    "login": "Prijava",
+    "or_register_guest": "ili se registrirajte / nastavite kao gost",
+    "guest": "Nastavi kao gost",
+    "register": "Registracija",
+    "register_instruction": "Ispunite obrazac u nastavku",
+    "confirm_password": "Potvrdite lozinku",
+    "firstname": "Ime",
+    "lastname": "Prezime"
+  },
+
+  "search": {}
+}

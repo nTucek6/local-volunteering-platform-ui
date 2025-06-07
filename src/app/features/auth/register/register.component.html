@@ -1,6 +1,6 @@
 <div class="main-container">
-  <h1 class="title">Local Volunteer Platform</h1>
-  <h2>Login/register or continue as guest</h2>
+  <h1 class="title">{{ "title" | translate }}</h1>
+  <h2>{{ "auth.subtitle" | translate }}</h2>
   <p>Fill out the form below</p>
   <form (ngSubmit)="formSubmit()" id="register-form" autocomplete="auto">
     <mat-form-field class="form-group">
@@ -8,7 +8,7 @@
         type="email"
         matInput
         name="email"
-        placeholder="Email"
+        [placeholder]="'auth.email' | translate"
         [(ngModel)]="email"
         autocomplete="auto"
       />
@@ -18,7 +18,7 @@
         type="password"
         matInput
         name="password"
-        placeholder="Password"
+          [placeholder]="'auth.password' | translate"
         [(ngModel)]="password"
         autocomplete="auto"
       />
@@ -28,7 +28,7 @@
         type="password"
         matInput
         name="confirm-password"
-        placeholder="Confirm Password"
+          [placeholder]="'auth.confirm_password' | translate"
         [(ngModel)]="confirmPassword"
         autocomplete="auto"
       />
@@ -38,7 +38,7 @@
         type="text"
         matInput
         name="firstname"
-        placeholder="Firstname"
+          [placeholder]="'auth.firstname' | translate"
         [(ngModel)]="firstname"
         autocomplete="auto"
       />
@@ -48,16 +48,16 @@
         type="text"
         matInput
         name="lastname"
-        placeholder="Lastname"
+        [placeholder]="'auth.lastname' | translate"
         [(ngModel)]="lastname"
         autocomplete="auto"
       />
     </mat-form-field>
-    <button type="submit" class="login-btn" mat-button>Register</button>
+    <button type="submit" class="login-btn" mat-button>{{ "auth.register" | translate }}</button>
   </form>
-  <p class="divider">or register/continue as guest</p>
+  <p class="divider">{{ "auth.or_register_guest" | translate }}</p>
   <div class="other-option">
-    <a routerLink="/" mat-button>Continue as guest</a>
-    <a routerLink="/login" mat-button>Login</a>
+    <a routerLink="/" mat-button>{{ "auth.guest" | translate }}</a>
+    <a routerLink="/login" mat-button>{{ "auth.login" | translate }}</a>
   </div>
 </div>

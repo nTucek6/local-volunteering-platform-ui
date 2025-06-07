@@ -1,0 +1,34 @@
+{
+  "language": {
+    "croatian": "Croatian",
+    "english": "English"
+  },
+
+  "title": "Local Volunteering Platform",
+
+  "sidebar": {
+    "discover": "Discover",
+    "home": "Home",
+    "search": "Search",
+    "settings": "Settings",
+    "profile": "Profile",
+    "new_event": "New event",
+    "logout": "Logout"
+  },
+  "auth": {
+    "subtitle": "Login/register or continue as guest",
+    "login_instruction": "Enter your email and password to login",
+    "email": "Email",
+    "password": "Password",
+    "login": "Login",
+    "or_register_guest": "or register/continue as guest",
+    "guest": "Continue as guest",
+    "register": "Register",
+    "register_instruction": "Fill out the form below",
+    "confirm_password": "Confirm Password",
+    "firstname": "Firstname",
+    "lastname": "Lastname"
+  },
+
+  "search": {}
+}
