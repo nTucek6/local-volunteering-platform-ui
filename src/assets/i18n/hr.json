@@ -6,6 +6,13 @@
 
   "title": "Lokalna Platforma Volontera",
 
+  "event_category": {
+    "PETS": "Ljubimci",
+    "PEOPLE": "Ljudi",
+    "COMMUNITY": "Zajednica",
+    "OTHER": "Ostalo"
+  },
+
   "sidebar": {
     "discover": "Istraži",
     "home": "Početna",
@@ -30,5 +37,29 @@
     "lastname": "Prezime"
   },
 
-  "search": {}
+  "search": {
+    "title": "Naslov",
+    "category": "Kategorija",
+    "location": "Lokacija",
+    "chose_a_date_from": "Odaberite datum od",
+    "chose_a_date_to": "Odaberite datum do",
+    "filter": "Filtriraj",
+    "date": "Datum",
+    "owner": "Vlasnik"
+  },
+  
+  "new_event": {
+    "title": "Novi događaj",
+    "category": "Kategorija",
+    "title_label": "Naslov",
+    "description": "Opis",
+    "details": "Detalji",
+    "location": "Lokacija",
+    "address": "Adresa",
+    "choose_date": "Odaberite datum",
+    "meeting_time": "Vrijeme sastanka",
+    "upload_images": "Učitaj slike",
+    "create": "Kreiraj",
+    "image_preview_alt": "Pregled slike"
+  }
 }

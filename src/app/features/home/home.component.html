@@ -1,7 +1,7 @@
 <div class="app-carousel" *ngFor="let category of events | keyvalue">
   <app-carousel
     [list]="category.value"
-    [title]="category.key | titlecase"
+    [title]="'event_category.' + (category.key | uppercase) | translate | titlecase"
     description="Helping the mans friend"
   ></app-carousel>
 </div>

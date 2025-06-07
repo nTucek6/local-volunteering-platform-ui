@@ -19,6 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { EventService } from 'src/app/shared/services/event.service';
 import { NewEventDto } from 'src/app/shared/dto/new-event.dto';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-new-event',
@@ -31,6 +32,7 @@ import { NewEventDto } from 'src/app/shared/dto/new-event.dto';
     MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
+    TranslateModule,
   ],
   templateUrl: './new-event.component.html',
   styleUrl: './new-event.component.scss',

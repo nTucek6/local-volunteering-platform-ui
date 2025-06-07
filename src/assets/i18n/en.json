@@ -6,6 +6,13 @@
 
   "title": "Local Volunteering Platform",
 
+  "event_category": {
+    "PETS": "Pets",
+    "PEOPLE": "People",
+    "COMMUNITY": "Community",
+    "OTHER": "Other"
+  },
+
   "sidebar": {
     "discover": "Discover",
     "home": "Home",
@@ -30,5 +37,29 @@
     "lastname": "Lastname"
   },
 
-  "search": {}
+  "search": {
+    "title": "Title",
+    "category": "Category",
+    "location": "Location",
+    "chose_a_date_from": "Choose a date from",
+    "chose_a_date_to": "Choose a date to",
+    "filter": "Filter",
+    "date": "Date",
+    "owner": "Owner"
+  },
+
+  "new_event": {
+    "title": "New event",
+    "category": "Category",
+    "title_label": "Title",
+    "description": "Description",
+    "details": "Details",
+    "location": "Location",
+    "address": "Address",
+    "choose_date": "Choose a date",
+    "meeting_time": "Meeting time",
+    "upload_images": "Upload images",
+    "create": "Create",
+    "image_preview_alt": "Image preview"
+  }
 }

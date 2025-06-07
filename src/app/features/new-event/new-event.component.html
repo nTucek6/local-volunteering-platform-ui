@@ -1,25 +1,28 @@
 <div class="main-container">
-  <h1 class="title">New event</h1>
+  <h1 class="title">{{ "new_event.title" | translate }}</h1>
   <form (ngSubmit)="formSubmit()" id="new-event-form" autocomplete="auto">
     <mat-form-field class="form-group">
-      <mat-label>Category</mat-label>
+      <mat-label>{{ "new_event.category" | translate }}</mat-label>
       <mat-select
         [(ngModel)]="selectedCategory"
         name="category"
         [ngModelOptions]="{ standalone: true }"
       >
         <ng-container *ngFor="let cat of eventCategories">
-          <mat-option [value]="cat">{{ cat | titlecase }}</mat-option>
+          <mat-option [value]="cat">{{
+            "event_category." + cat | translate | titlecase
+          }}</mat-option>
         </ng-container>
       </mat-select>
     </mat-form-field>
+
     <mat-form-field class="form-group">
-      <mat-label>Title</mat-label>
+      <mat-label>{{ "new_event.title_label" | translate }}</mat-label>
       <input
         type="text"
         matInput
         name="title"
-        placeholder="Title"
+        [placeholder]="'new_event.title_label' | translate"
         [(ngModel)]="selectedTitle"
         autocomplete="auto"
         [ngModelOptions]="{ standalone: true }"
@@ -27,13 +30,13 @@
     </mat-form-field>
 
     <mat-form-field class="form-group">
-      <mat-label>Description</mat-label>
+      <mat-label>{{ "new_event.description" | translate }}</mat-label>
       <textarea
         matInput
         cdkTextareaAutosize
         #autosize="cdkTextareaAutosize"
         name="description"
-        placeholder="Description..."
+        [placeholder]="'new_event.description' | translate"
         [(ngModel)]="selectedDescription"
         autocomplete="auto"
         [ngModelOptions]="{ standalone: true }"
@@ -41,13 +44,13 @@
     </mat-form-field>
 
     <mat-form-field class="form-group">
-      <mat-label>Details</mat-label>
+      <mat-label>{{ "new_event.details" | translate }}</mat-label>
       <textarea
         matInput
         cdkTextareaAutosize
         #autosize="cdkTextareaAutosize"
-        name="details..."
-        placeholder="Details..."
+        name="details"
+        [placeholder]="'new_event.details' | translate"
         [(ngModel)]="selectedDetails"
         autocomplete="auto"
         [ngModelOptions]="{ standalone: true }"
@@ -55,12 +58,12 @@
     </mat-form-field>
 
     <mat-form-field class="form-group">
-      <mat-label>Location</mat-label>
+      <mat-label>{{ "new_event.location" | translate }}</mat-label>
       <input
         type="text"
         matInput
         name="location"
-        placeholder="Location"
+        [placeholder]="'new_event.location' | translate"
         [(ngModel)]="selectedLocation"
         autocomplete="auto"
         [ngModelOptions]="{ standalone: true }"
@@ -68,12 +71,12 @@
     </mat-form-field>
 
     <mat-form-field class="form-group">
-      <mat-label>Address</mat-label>
+      <mat-label>{{ "new_event.address" | translate }}</mat-label>
       <input
         type="text"
         matInput
         name="address"
-        placeholder="Address"
+        [placeholder]="'new_event.address' | translate"
         [(ngModel)]="selectedAddress"
         autocomplete="auto"
         [ngModelOptions]="{ standalone: true }"
@@ -81,7 +84,7 @@
     </mat-form-field>
 
     <mat-form-field class="form-group">
-      <mat-label>Choose a date</mat-label>
+      <mat-label>{{ "new_event.choose_date" | translate }}</mat-label>
       <input
         name="date"
         matInput
@@ -95,36 +98,49 @@
       ></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
+
     <mat-form-field class="form-group">
-      <mat-label>Meeting time</mat-label>
+      <mat-label>{{ "new_event.meeting_time" | translate }}</mat-label>
       <input
         name="time"
         matInput
         [matTimepicker]="timepicker"
         [(ngModel)]="selectedDate"
       />
-      <mat-timepicker #timepicker />
-      <mat-timepicker-toggle [for]="timepicker" matSuffix />
+      <mat-timepicker #timepicker></mat-timepicker>
+      <mat-timepicker-toggle
+        [for]="timepicker"
+        matSuffix
+      ></mat-timepicker-toggle>
     </mat-form-field>
+
     <div class="form-group input-image">
       <input
         type="file"
         name="image"
-        placeholder="Upload images"
+        [placeholder]="'new_event.upload_images' | translate"
         (change)="onFileSelected($event)"
         multiple
         accept="image/*"
         autocomplete="auto"
       />
     </div>
-    <button type="submit" class="save-btn" mat-button>Create</button>
+
+    <button type="submit" class="save-btn" mat-button>
+      {{ "new_event.create" | translate }}
+    </button>
   </form>
+
   <div
     id="image-preview"
     [ngStyle]="{ 'margin-bottom': selectedImages.length > 0 ? '200px' : '0' }"
   >
     <ng-container *ngFor="let path of imagePreviews; let i = index">
-      <img [src]="path" alt="Image preview" (click)="removeImage(i)" />
+      <img
+        [src]="path"
+        alt="{{ 'new_event.image_preview_alt' | translate }}"
+        (click)="removeImage(i)"
+      />
     </ng-container>
   </div>
 </div>

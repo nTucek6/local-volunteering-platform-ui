@@ -8,10 +8,11 @@ import {
   HomePageDto,
   HomePageResponse,
 } from 'src/app/shared/dto/home-page.dto';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, CarouselComponent],
+  imports: [CommonModule, CarouselComponent, TranslateModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })

@@ -23,6 +23,7 @@ import { MatTimepickerModule } from '@angular/material/timepicker';
 import { EventFilterParams } from 'src/app/shared/model/event-filter-params';
 import { EventService } from 'src/app/shared/services/event.service';
 import { MatIcon } from '@angular/material/icon';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-search',
@@ -39,7 +40,8 @@ import { MatIcon } from '@angular/material/icon';
     MatTableModule,
     RouterLink,
     MatTimepickerModule,
-    MatIcon
+    MatIcon,
+    TranslateModule,
   ],
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
@@ -108,7 +110,8 @@ export class SearchComponent {
 
   selectedLocation: string = '';
   selectedCategory?: EventCategory;
-  selectedDate: Date = new Date();
+  selectedDateFrom: Date = new Date();
+  selectedDateTo: Date = new Date();
   selectedTitle: string = '';
 
   formSubmit() {
@@ -123,7 +126,7 @@ export class SearchComponent {
         this.page,
         this.size,
         eventFilterParams,
-        this.ascending,
+        this.ascending
         //this.selectedDate.toDateString()
       )
       .subscribe((response) => {
@@ -136,8 +139,7 @@ export class SearchComponent {
     this.route.navigate(['/details/' + eventId]);
   }
 
-  clearCategory(){
+  clearCategory() {
     this.selectedCategory = undefined;
   }
-
 }
