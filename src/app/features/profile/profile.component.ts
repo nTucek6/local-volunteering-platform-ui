@@ -2,28 +2,30 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
+import { RouterLinkActive } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule, RouterLink],
+  imports: [
+    CommonModule,
+    RouterLink,
+    RouterOutlet,
+    RouterLinkActive,
+    TranslateModule,
+  ],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent {
-  id: string | null = '';
-
   private route = inject(ActivatedRoute);
+
+  id: string | null = '';
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
       this.id = params.get('id');
-
-        if (this.id != null) {
-       /* const id = this.eventId;
-        this.eventService.getEventById(parseInt(id)).subscribe((response) => {
-          this.event = response;
-        }); */
-      }
     });
   }
 }

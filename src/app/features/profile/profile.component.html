@@ -10,10 +10,10 @@
     </div>
 
     <nav class="nav">
-        <a [routerLink]="`/profile/${id}`" >Overview</a>
-        <a routerLink="volunteer-history" >Volunteer history</a>
-        <a routerLink="my-events" >My events</a>
+      <p>{{"profile.overview" | translate}}</p>
     </nav>
-
+  </div>
+  <div class="route-content">
+    <router-outlet></router-outlet>
   </div>
 </div>

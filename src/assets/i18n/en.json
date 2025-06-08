@@ -38,6 +38,7 @@
   },
 
   "search": {
+    "active_events": "Active events",
     "title": "Title",
     "category": "Category",
     "location": "Location",
@@ -61,5 +62,16 @@
     "upload_images": "Upload images",
     "create": "Create",
     "image_preview_alt": "Image preview"
+  },
+
+  "profile": {
+    "overview": "Overview",
+    "volunteer_history": "Volunteer history",
+    "my_events": "My events",
+    "personal_contact_info": "Personal & Contact info",
+    "location": "Location",
+    "contact_email": "Contact Email",
+    "bio": "Bio",
+    "current_status": "Current status"
   }
 }

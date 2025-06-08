@@ -1,0 +1,134 @@
+<div>
+  <h2>{{title}}</h2>
+  <form (ngSubmit)="formSubmit()" id="search-filter">
+    <mat-form-field class="form-group">
+      <mat-label>{{ "search.title" | translate }}</mat-label>
+      <input
+        type="text"
+        matInput
+        name="title"
+        [placeholder]="'search.title' | translate"
+        [(ngModel)]="selectedTitle"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="form-group">
+      <mat-label>{{ "search.category" | translate }}</mat-label>
+      <mat-select
+        [(ngModel)]="selectedCategory"
+        name="category"
+        [ngModelOptions]="{ standalone: true }"
+      >
+        <ng-container *ngFor="let cat of eventCategories">
+          <mat-option [value]="cat">{{
+            "event_category." + cat | translate | titlecase
+          }}</mat-option>
+        </ng-container>
+      </mat-select>
+      <button
+        mat-icon-button
+        *ngIf="selectedCategory"
+        matSuffix
+        aria-label="Clear"
+        (click)="clearCategory()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field class="form-group">
+      <mat-label>{{ "search.location" | translate }}</mat-label>
+      <input
+        type="text"
+        matInput
+        name="location"
+        [placeholder]="'search.location' | translate"
+        [(ngModel)]="selectedLocation"
+        autocomplete="auto"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>{{ "search.chose_a_date_from" | translate }}</mat-label>
+      <input
+        name="date"
+        matInput
+        [matDatepicker]="pickerFrom"
+        [(ngModel)]="selectedDateFrom"
+        [ngModelOptions]="{ standalone: true }"
+      />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="pickerFrom"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #pickerFrom></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>{{ "search.chose_a_date_to" | translate }}</mat-label>
+      <input
+        name="date"
+        matInput
+        [matDatepicker]="pickerTo"
+        [(ngModel)]="selectedDateTo"
+        [ngModelOptions]="{ standalone: true }"
+      />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="pickerTo"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #pickerTo></mat-datepicker>
+    </mat-form-field>
+
+    <button class="search-button" type="submit" mat-button>{{ "search.filter" | translate }}</button>
+  </form>
+
+  <div class="list-container">
+    <table mat-table [dataSource]="eventsDto" class="mat-elevation-z8">
+      <ng-container matColumnDef="location">
+        <th mat-header-cell *matHeaderCellDef>{{ "search.location" | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.location }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>{{ "search.title" | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef>{{ "search.category" | translate }}</th>
+        <td mat-cell *matCellDef="let element">
+          <span class="category">{{ element.category }}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>{{ "search.date" | translate }}</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.startDateTime | date : "dd/MM/yyyy" }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="owner">
+        <th mat-header-cell *matHeaderCellDef>{{ "search.owner" | translate }}</th>
+        <td mat-cell *matCellDef="let element">
+          <a
+            [routerLink]="'/profile/' + element.creatorId"
+            (click)="$event.stopPropagation()"
+          >
+            <img class="profile-img" [src]="element.creatorProfileImageURL" />
+          </a>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        (click)="navigateToDetails(row.id)"
+      ></tr>
+    </table>
+  </div>
+</div>
+

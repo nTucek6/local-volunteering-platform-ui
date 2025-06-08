@@ -38,6 +38,7 @@
   },
 
   "search": {
+    "active_events": "Aktivni događaji",
     "title": "Naslov",
     "category": "Kategorija",
     "location": "Lokacija",
@@ -47,7 +48,7 @@
     "date": "Datum",
     "owner": "Vlasnik"
   },
-  
+
   "new_event": {
     "title": "Novi događaj",
     "category": "Kategorija",
@@ -61,5 +62,16 @@
     "upload_images": "Učitaj slike",
     "create": "Kreiraj",
     "image_preview_alt": "Pregled slike"
+  },
+
+  "profile": {
+    "overview": "Pregled",
+    "volunteer_history": "Povijest volontiranja",
+    "my_events": "Moji događaji",
+    "personal_contact_info": "Osobni i kontakt podaci",
+    "location": "Lokacija",
+    "contact_email": "Kontakt e-mail",
+    "bio": "Biografija",
+    "current_status": "Trenutni status"
   }
 }
