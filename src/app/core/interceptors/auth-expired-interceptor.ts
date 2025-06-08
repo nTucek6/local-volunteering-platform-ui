@@ -10,7 +10,7 @@ import { catchError, Observable, switchMap } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Injectable()
-export class AuthInterceptor implements HttpInterceptor {
+export class AuthExpiredInterceptor implements HttpInterceptor {
   private isRefreshing = false;
 
   private authService = inject(AuthService);
@@ -19,7 +19,6 @@ export class AuthInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    //change to cookie
     const token = localStorage.getItem('token');
     if (token) {
       const decoded: any = jwtDecode(token);

@@ -14,7 +14,7 @@ import {
 } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { AuthInterceptor } from './core/interceptors/auth-interceptor';
+import { AuthExpiredInterceptor } from './core/interceptors/auth-expired-interceptor';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -42,7 +42,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     provideHttpClient(withInterceptorsFromDi()),
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
+      useClass: AuthExpiredInterceptor,
       multi: true,
     },
   ],
