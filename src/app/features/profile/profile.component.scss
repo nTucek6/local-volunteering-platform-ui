@@ -59,3 +59,48 @@
 .active-profile{
   border-bottom: 1px solid blue;
 }
+
+
+#overview-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+
+}
+
+.personal-info,
+.bio-info {
+  border-bottom: 2px solid rgba(65, 64, 64, 0.6);
+  padding-bottom: 10px;
+}
+
+.data-table {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.bio-info {
+  margin-top: 20px;
+}
+
+.events{
+  margin-left: 200px;
+}
+
+.events h3{
+  margin-bottom: 10px;
+}
+
+.events-list{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.events-list img{
+  border-radius: 50%;
+  height: 50px;
+  margin-right: 5px;
+}

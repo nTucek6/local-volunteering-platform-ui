@@ -30,15 +30,6 @@ const routes: Routes = [
           import('./features/profile/profile.component').then(
             (m) => m.ProfileComponent
           ),
-        children: [
-          {
-            path: 'overview',
-            loadComponent: () =>
-              import(
-                './features/profile/overview/overview.component'
-              ).then((m) => m.OverviewComponent),
-          },
-        ],
       },
       {
         path: 'details/:id',

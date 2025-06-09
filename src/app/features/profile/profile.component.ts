@@ -10,9 +10,6 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-profile',
   imports: [
     CommonModule,
-    RouterLink,
-    RouterOutlet,
-    RouterLinkActive,
     TranslateModule,
   ],
   templateUrl: './profile.component.html',

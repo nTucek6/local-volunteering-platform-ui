@@ -20,16 +20,8 @@
     >
   </div>
   <div class="nav-items">
-    <button (click)="onLanguageChange('hr')">
-      {{ "language.croatian" | translate }}
-    </button>
-    <button (click)="onLanguageChange('en')">
-      {{ "language.english" | translate }}
-    </button>
-  </div>
-  <div class="nav-items">
     <h5 class="nav-items-title">{{ "sidebar.settings" | translate }}</h5>
-    <a [routerLink]="`/profile/1/overview`"
+    <a [routerLink]="`/profile/${userId}`"
       ><mat-icon
         aria-hidden="false"
         aria-label="Person icon"
@@ -45,6 +37,27 @@
       ></mat-icon
       >{{ "sidebar.new_event" | translate }}</a
     >
+
+    <!--  <div class="nav-items">
+      <button (click)="onLanguageChange('hr')" mat-button>
+        {{ "language.croatian" | translate }}
+      </button>
+      <button (click)="onLanguageChange('en')" mat-button>
+        {{ "language.english" | translate }}
+      </button>
+    </div>
+    -->
+    <mat-form-field class="form-group">
+      <mat-label>{{ "language.title" | translate }}</mat-label>
+      <mat-select (valueChange)="onLanguageChange($event)" name="language" [(ngModel)]="selectedLanguage">
+        <mat-option value="en"
+          >{{ "language.english" | translate }}
+        </mat-option>
+        <mat-option value="hr">
+          {{ "language.croatian" | translate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
     <a routerLink="/login"
       ><mat-icon>exit_to_app</mat-icon>{{ "sidebar.logout" | translate }}</a
     >
