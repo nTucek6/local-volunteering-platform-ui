@@ -9,7 +9,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserCredentials } from 'src/app/shared/model/user-credentials';
-import { JwtToken } from 'src/app/shared/model/jwt-token';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
@@ -42,18 +41,11 @@ export class LoginComponent {
 
     this.authService
       .authenticate(userCredentials)
-      .subscribe((jwtToken: JwtToken) => {});
+      .subscribe((response) => {
+        console.log(response);
+        this.userService.currentUser = response;
+      });
 
-    this.router.navigate(['/']);
-  }
-
-  successfulLogin(jwtToken: JwtToken) {
-    localStorage.setItem('token', jwtToken.token); // store token value to localstorage
-    this.userService
-      .getCurrentUser()
-      .subscribe(
-        (currentUser) => (this.userService.currentUser = currentUser)
-      );
     this.router.navigate(['/']);
   }
 }

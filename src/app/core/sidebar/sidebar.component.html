@@ -58,8 +58,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <a routerLink="/login"
-      ><mat-icon>exit_to_app</mat-icon>{{ "sidebar.logout" | translate }}</a
-    >
+
+    <button class="logout-btn" (click)="onLogout()" mat-button><mat-icon>exit_to_app</mat-icon>{{ "sidebar.logout" | translate }}</button>
   </div>
 </div>

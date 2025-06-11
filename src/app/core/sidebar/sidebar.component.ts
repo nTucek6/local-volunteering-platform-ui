@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TranslateService } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -25,11 +26,19 @@ import { MatSelectModule } from '@angular/material/select';
 export class SidebarComponent {
   private translate = inject(TranslateService);
 
-  selectedLanguage =  "en";
+  private authService = inject(AuthService);
+
+  selectedLanguage = 'en';
 
   userId = 1;
 
   onLanguageChange(code: string) {
     this.translate.use(code);
+  }
+
+  onLogout() {
+    this.authService.logout().subscribe((response) => {
+      console.log(response);
+    });
   }
 }
