@@ -12,6 +12,7 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
+  standalone: true,
   imports: [
     CommonModule,
     FormsModule,
@@ -21,18 +22,33 @@ import { TranslateModule } from '@ngx-translate/core';
     MatFormFieldModule,
     TranslateModule
   ],
-
 })
 export class RegisterComponent {
- private router = inject(Router);
+  private router = inject(Router);
 
   email: string = '';
-  password: string = ''
+  password: string = '';
   confirmPassword: string = '';
-  firstname: string = ''
-  lastname: string = ''
+  firstname: string = '';
+  lastname: string = '';
 
   formSubmit() {
-    this.router.navigate(['']);
+    if (
+      !this.email.trim() ||
+      !this.password.trim() ||
+      !this.confirmPassword.trim() ||
+      !this.firstname.trim() ||
+      !this.lastname.trim()
+    ) {
+      alert('Sva polja su obavezna.');
+      return;
+    }
+
+    if (this.password !== this.confirmPassword) {
+      alert('Lozinke se ne podudaraju.');
+      return;
+    }
+
+    this.router.navigate(['/']);
   }
 }

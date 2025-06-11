@@ -1,60 +1,103 @@
 <div class="main-container">
   <h1 class="title">{{ "title" | translate }}</h1>
   <h2>{{ "auth.subtitle" | translate }}</h2>
-  <p>Fill out the form below</p>
-  <form (ngSubmit)="formSubmit()" id="register-form" autocomplete="auto">
+  <p>{{ "auth.register_instruction" | translate }}</p>
+
+  <form #registerForm="ngForm" (ngSubmit)="formSubmit()" id="register-form" autocomplete="auto">
+    
     <mat-form-field class="form-group">
       <input
         type="email"
         matInput
         name="email"
-        [placeholder]="'auth.email' | translate"
+        required
         [(ngModel)]="email"
+        #emailRef="ngModel"
+        [placeholder]="'auth.email' | translate"
         autocomplete="auto"
       />
+      <mat-error *ngIf="emailRef.invalid && emailRef.touched">
+        {{ "auth.email_required" | translate }}
+      </mat-error>
     </mat-form-field>
+
     <mat-form-field class="form-group">
       <input
         type="password"
         matInput
         name="password"
-          [placeholder]="'auth.password' | translate"
+        required
         [(ngModel)]="password"
+        #passwordRef="ngModel"
+        [placeholder]="'auth.password' | translate"
         autocomplete="auto"
       />
+      <mat-error *ngIf="passwordRef.invalid && passwordRef.touched">
+        {{ "auth.password_required" | translate }}
+      </mat-error>
     </mat-form-field>
-        <mat-form-field class="form-group">
+
+    <mat-form-field class="form-group">
       <input
         type="password"
         matInput
         name="confirm-password"
-          [placeholder]="'auth.confirm_password' | translate"
+        required
         [(ngModel)]="confirmPassword"
+        #confirmRef="ngModel"
+        [placeholder]="'auth.confirm_password' | translate"
         autocomplete="auto"
       />
+      <mat-error *ngIf="confirmRef.invalid && confirmRef.touched">
+        {{ "auth.confirm_password_required" | translate }}
+      </mat-error>
+      <mat-error *ngIf="password !== confirmPassword && confirmRef.touched">
+        {{ "auth.passwords_do_not_match" | translate }}
+      </mat-error>
     </mat-form-field>
-        <mat-form-field class="form-group">
+
+    <mat-form-field class="form-group">
       <input
         type="text"
         matInput
         name="firstname"
-          [placeholder]="'auth.firstname' | translate"
+        required
         [(ngModel)]="firstname"
+        #firstRef="ngModel"
+        [placeholder]="'auth.firstname' | translate"
         autocomplete="auto"
       />
+      <mat-error *ngIf="firstRef.invalid && firstRef.touched">
+        {{ "auth.firstname_required" | translate }}
+      </mat-error>
     </mat-form-field>
-        <mat-form-field class="form-group">
+
+    <mat-form-field class="form-group">
       <input
         type="text"
         matInput
         name="lastname"
-        [placeholder]="'auth.lastname' | translate"
+        required
         [(ngModel)]="lastname"
+        #lastRef="ngModel"
+        [placeholder]="'auth.lastname' | translate"
         autocomplete="auto"
       />
+      <mat-error *ngIf="lastRef.invalid && lastRef.touched">
+        {{ "auth.lastname_required" | translate }}
+      </mat-error>
     </mat-form-field>
-    <button type="submit" class="login-btn" mat-button>{{ "auth.register" | translate }}</button>
+
+    <button
+      type="submit"
+      class="login-btn"
+      mat-button
+      [disabled]="registerForm.invalid || password !== confirmPassword"
+    >
+      {{ "auth.register" | translate }}
+    </button>
   </form>
+
   <p class="divider">{{ "auth.or_register_guest" | translate }}</p>
   <div class="other-option">
     <a routerLink="/" mat-button>{{ "auth.guest" | translate }}</a>

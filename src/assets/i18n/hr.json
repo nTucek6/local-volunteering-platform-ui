@@ -1,6 +1,6 @@
 {
   "language": {
-    "title":"Jezik",
+    "title": "Jezik",
     "croatian": "Hrvatski",
     "english": "Engleski"
   },
@@ -23,19 +23,27 @@
     "new_event": "Novi događaj",
     "logout": "Odjava"
   },
+
   "auth": {
-    "subtitle": "Prijavite se / registrirajte ili nastavite kao gost",
-    "login_instruction": "Unesite svoju e-poštu i lozinku za prijavu",
-    "email": "E-pošta",
-    "password": "Lozinka",
-    "login": "Prijava",
-    "or_register_guest": "ili se registrirajte / nastavite kao gost",
-    "guest": "Nastavi kao gost",
-    "register": "Registracija",
+    "subtitle": "Prijavi se, registriraj ili nastavi kao gost",
+    "login_instruction": "Unesite svoju email adresu i lozinku za prijavu",
     "register_instruction": "Ispunite obrazac u nastavku",
-    "confirm_password": "Potvrdite lozinku",
+    "email": "Email",
+    "password": "Lozinka",
+    "confirm_password": "Potvrdi lozinku",
     "firstname": "Ime",
-    "lastname": "Prezime"
+    "lastname": "Prezime",
+    "login": "Prijava",
+    "register": "Registracija",
+    "guest": "Nastavi kao gost",
+    "or_register_guest": "ili se registriraj/nastavi kao gost",
+
+    "email_required": "Email je obavezan",
+    "password_required": "Lozinka je obavezna",
+    "confirm_password_required": "Potvrda lozinke je obavezna",
+    "firstname_required": "Ime je obavezno",
+    "lastname_required": "Prezime je obavezno",
+    "passwords_do_not_match": "Lozinke se ne podudaraju"
   },
 
   "search": {
@@ -62,7 +70,12 @@
     "meeting_time": "Vrijeme sastanka",
     "upload_images": "Učitaj slike",
     "create": "Kreiraj",
-    "image_preview_alt": "Pregled slike"
+    "image_preview_alt": "Pregled slike",
+    "category_required": "Kategorija je obavezna",
+    "title_required": "Naslov je obavezan",
+    "description_required": "Opis je obavezan",
+    "location_required": "Lokacija je obavezna",
+    "time_required": "Vrijeme sastanka je obavezno"
   },
 
   "profile": {

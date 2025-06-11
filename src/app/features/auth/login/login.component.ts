@@ -34,21 +34,26 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
 
-  formSubmit() {
-    const userCredentials: UserCredentials = {
-      email: this.email,
-      password: this.password,
-    };
-
-    this.authService
-      .authenticate(userCredentials)
-      .subscribe((jwtToken: JwtToken) => {});
-
-    this.router.navigate(['/']);
+formSubmit() {
+  if (!this.email.trim() || !this.password.trim()) {
+    alert('Molimo unesite email i lozinku.');
+    return;
   }
 
+  const userCredentials: UserCredentials = {
+    email: this.email,
+    password: this.password,
+  };
+
+  this.authService.authenticate(userCredentials).subscribe({
+    next: (jwtToken: JwtToken) => this.successfulLogin(jwtToken),
+    error: () => alert('Neuspješna prijava. Provjerite podatke.'),
+  });
+}
+
+
   successfulLogin(jwtToken: JwtToken) {
-    localStorage.setItem('token', jwtToken.token); // store token value to localstorage
+    localStorage.setItem('token', jwtToken.token);
     this.userService
       .getCurrentUser()
       .subscribe(
