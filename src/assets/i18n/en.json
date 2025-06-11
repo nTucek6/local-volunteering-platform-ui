@@ -1,6 +1,6 @@
 {
   "language": {
-    "title":"Language",
+    "title": "Language",
     "croatian": "Croatian",
     "english": "English"
   },
@@ -23,19 +23,27 @@
     "new_event": "New event",
     "logout": "Logout"
   },
+
   "auth": {
-    "subtitle": "Login/register or continue as guest",
-    "login_instruction": "Enter your email and password to login",
+    "subtitle": "Log in, register or continue as guest",
+    "login_instruction": "Enter your email address and password to log in",
+    "register_instruction": "Fill out the form below",
     "email": "Email",
     "password": "Password",
-    "login": "Login",
-    "or_register_guest": "or register/continue as guest",
-    "guest": "Continue as guest",
+    "confirm_password": "Confirm password",
+    "firstname": "First name",
+    "lastname": "Last name",
+    "login": "Log in",
     "register": "Register",
-    "register_instruction": "Fill out the form below",
-    "confirm_password": "Confirm Password",
-    "firstname": "Firstname",
-    "lastname": "Lastname"
+    "guest": "Continue as guest",
+    "or_register_guest": "or register/continue as guest",
+
+    "email_required": "Email is required",
+    "password_required": "Password is required",
+    "confirm_password_required": "Password confirmation is required",
+    "firstname_required": "First name is required",
+    "lastname_required": "Last name is required",
+    "passwords_do_not_match": "Passwords do not match"
   },
 
   "search": {
@@ -62,7 +70,12 @@
     "meeting_time": "Meeting time",
     "upload_images": "Upload images",
     "create": "Create",
-    "image_preview_alt": "Image preview"
+    "image_preview_alt": "Image preview",
+    "category_required": "Category is required",
+    "title_required": "Title is required",
+    "description_required": "Description is required",
+    "location_required": "Location is required",
+    "time_required": "Meeting time is required"
   },
 
   "profile": {

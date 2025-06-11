@@ -33,11 +33,11 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
 
-  formSubmit() {
-    const userCredentials: UserCredentials = {
-      email: this.email,
-      password: this.password,
-    };
+formSubmit() {
+  if (!this.email.trim() || !this.password.trim()) {
+    alert('Molimo unesite email i lozinku.');
+    return;
+  }
 
     this.authService
       .authenticate(userCredentials)

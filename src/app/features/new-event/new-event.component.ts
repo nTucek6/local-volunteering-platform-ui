@@ -52,6 +52,7 @@ export class NewEventComponent {
   selectedLocation: string = '';
   selectedCategory?: EventCategory;
   selectedDate: Date = new Date();
+  selectedTime: string = ''; 
   selectedTitle: string = '';
   selectedDescription: string = '';
   selectedDetails: string = '';
@@ -60,7 +61,6 @@ export class NewEventComponent {
   private _injector = inject(Injector);
 
   triggerResize() {
-    // Wait for content to render, then trigger textarea resize.
     afterNextRender(
       () => {
         if (this.autosize != undefined) this.autosize.resizeToFitContent(true);
@@ -71,37 +71,71 @@ export class NewEventComponent {
     );
   }
 
-  onFileSelected(event: any) {
-    const files: File[] = Array.from(event.target.files);
-    this.selectedImages = [...this.selectedImages, ...files];
+onFileSelected(event: any) {
+  const files: File[] = Array.from(event.target.files);
 
-    files.forEach((file) => {
-      const url = URL.createObjectURL(file);
-      this.imagePreviews.push(url);
-    });
+  const availableSlots = 3 - this.selectedImages.length;
+  const filesToAdd = files.slice(0, availableSlots);
+
+  if (files.length > availableSlots) {
+    alert(`Možete dodati najviše 3 slike. Dodano je samo prvih ${availableSlots} novih slika.`);
   }
+
+  this.selectedImages = [...this.selectedImages, ...filesToAdd];
+
+  filesToAdd.forEach((file) => {
+    const url = URL.createObjectURL(file);
+    this.imagePreviews.push(url);
+  });
+}
+
 
   removeImage(index: number) {
     this.selectedImages.splice(index, 1);
     this.imagePreviews.splice(index, 1);
   }
 
-  formSubmit() {
-    if (this.selectedCategory != null) {
-      const newEventDTO: NewEventDto = {
-        category: this.selectedCategory,
-        title: this.selectedTitle,
-        description: this.selectedDescription,
-        details: this.selectedDetails,
-        location: this.selectedLocation,
-        address: this.selectedAddress,
-        startDateTime: this.selectedDate,
-        creatorId: 1,
-        images: this.selectedImages,
-      };
-      this.eventService
-        .createEvent(newEventDTO)
-        .subscribe((response) => console.log(response));
-    }
+formSubmit() {
+  if (
+    !this.selectedCategory ||
+    !this.selectedTitle.trim() ||
+    !this.selectedDescription.trim() ||
+    !this.selectedLocation.trim() ||
+    !this.selectedDate ||
+    !this.selectedTime.trim()
+  ) {
+    alert('Molimo popunite sva obavezna polja.');
+    return;
+  }
+
+  if (this.selectedImages.length < 1) {
+    alert('Molimo dodajte barem jednu sliku.');
+    return;
+  }
+
+  const newEventDTO: NewEventDto = {
+    category: this.selectedCategory,
+    title: this.selectedTitle,
+    description: this.selectedDescription,
+    details: this.selectedDetails,
+    location: this.selectedLocation,
+    address: this.selectedAddress,
+    startDateTime: this.combineDateAndTime(this.selectedDate, this.selectedTime),
+    creatorId: 1,
+    images: this.selectedImages,
+  };
+
+  this.eventService.createEvent(newEventDTO).subscribe((response) => {
+    console.log(response);
+    alert('Događaj je uspješno kreiran.');
+  });
+}
+
+
+  private combineDateAndTime(date: Date, timeString: string): Date {
+    const [hours, minutes] = timeString.split(':').map(Number);
+    const combined = new Date(date);
+    combined.setHours(hours, minutes, 0, 0);
+    return combined;
   }
 }

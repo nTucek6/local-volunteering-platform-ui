@@ -1,19 +1,29 @@
 <div class="main-container">
   <h1 class="title">{{ "new_event.title" | translate }}</h1>
-  <form (ngSubmit)="formSubmit()" id="new-event-form" autocomplete="auto">
+  <form
+    #newEventForm="ngForm"
+    (ngSubmit)="formSubmit()"
+    id="new-event-form"
+    autocomplete="auto"
+  >
     <mat-form-field class="form-group">
       <mat-label>{{ "new_event.category" | translate }}</mat-label>
       <mat-select
+        required
         [(ngModel)]="selectedCategory"
         name="category"
+        #categoryRef="ngModel"
         [ngModelOptions]="{ standalone: true }"
       >
         <ng-container *ngFor="let cat of eventCategories">
           <mat-option [value]="cat">{{
-            "event_category." + cat | translate | titlecase
+            ("event_category." + cat) | translate | titlecase
           }}</mat-option>
         </ng-container>
       </mat-select>
+      <mat-error *ngIf="categoryRef.invalid && categoryRef.touched">
+        {{ "new_event.category_required" | translate }}
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field class="form-group">
@@ -22,11 +32,16 @@
         type="text"
         matInput
         name="title"
-        [placeholder]="'new_event.title_label' | translate"
+        required
         [(ngModel)]="selectedTitle"
+        #titleRef="ngModel"
+        [placeholder]="'new_event.title_label' | translate"
         autocomplete="auto"
         [ngModelOptions]="{ standalone: true }"
       />
+      <mat-error *ngIf="titleRef.invalid && titleRef.touched">
+        {{ "new_event.title_required" | translate }}
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field class="form-group">
@@ -36,11 +51,16 @@
         cdkTextareaAutosize
         #autosize="cdkTextareaAutosize"
         name="description"
-        [placeholder]="'new_event.description' | translate"
+        required
         [(ngModel)]="selectedDescription"
+        #descriptionRef="ngModel"
+        [placeholder]="'new_event.description' | translate"
         autocomplete="auto"
         [ngModelOptions]="{ standalone: true }"
       ></textarea>
+      <mat-error *ngIf="descriptionRef.invalid && descriptionRef.touched">
+        {{ "new_event.description_required" | translate }}
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field class="form-group">
@@ -48,10 +68,10 @@
       <textarea
         matInput
         cdkTextareaAutosize
-        #autosize="cdkTextareaAutosize"
+        #autosizeDetails="cdkTextareaAutosize"
         name="details"
-        [placeholder]="'new_event.details' | translate"
         [(ngModel)]="selectedDetails"
+        [placeholder]="'new_event.details' | translate"
         autocomplete="auto"
         [ngModelOptions]="{ standalone: true }"
       ></textarea>
@@ -63,11 +83,16 @@
         type="text"
         matInput
         name="location"
-        [placeholder]="'new_event.location' | translate"
+        required
         [(ngModel)]="selectedLocation"
+        #locationRef="ngModel"
+        [placeholder]="'new_event.location' | translate"
         autocomplete="auto"
         [ngModelOptions]="{ standalone: true }"
       />
+      <mat-error *ngIf="locationRef.invalid && locationRef.touched">
+        {{ "new_event.location_required" | translate }}
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field class="form-group">
@@ -76,8 +101,8 @@
         type="text"
         matInput
         name="address"
-        [placeholder]="'new_event.address' | translate"
         [(ngModel)]="selectedAddress"
+        [placeholder]="'new_event.address' | translate"
         autocomplete="auto"
         [ngModelOptions]="{ standalone: true }"
       />
@@ -89,14 +114,16 @@
         name="date"
         matInput
         [matDatepicker]="picker"
+        required
         [(ngModel)]="selectedDate"
+        #dateRef="ngModel"
         [ngModelOptions]="{ standalone: true }"
       />
-      <mat-datepicker-toggle
-        matIconSuffix
-        [for]="picker"
-      ></mat-datepicker-toggle>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="dateRef.invalid && dateRef.touched">
+        {{ "new_event.date_required" | translate }}
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field class="form-group">
@@ -105,13 +132,17 @@
         name="time"
         matInput
         [matTimepicker]="timepicker"
-        [(ngModel)]="selectedDate"
+        required
+        [(ngModel)]="selectedTime"
+        #timeRef="ngModel"
+        autocomplete="auto"
+        [ngModelOptions]="{ standalone: true }"
       />
       <mat-timepicker #timepicker></mat-timepicker>
-      <mat-timepicker-toggle
-        [for]="timepicker"
-        matSuffix
-      ></mat-timepicker-toggle>
+      <mat-timepicker-toggle [for]="timepicker" matSuffix></mat-timepicker-toggle>
+      <mat-error *ngIf="timeRef.invalid && timeRef.touched">
+        {{ "new_event.time_required" | translate }}
+      </mat-error>
     </mat-form-field>
 
     <div class="form-group input-image">
@@ -126,7 +157,12 @@
       />
     </div>
 
-    <button type="submit" class="save-btn" mat-button>
+    <button
+      type="submit"
+      class="save-btn"
+      mat-button
+      [disabled]="newEventForm.invalid"
+    >
       {{ "new_event.create" | translate }}
     </button>
   </form>
