@@ -42,7 +42,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
     //kad cookie se slozi onda
-   /* {
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthExpiredInterceptor,
       multi: true,
@@ -51,7 +51,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
-    }, */
+    }, 
   ],
 })
 export class AppModule {}

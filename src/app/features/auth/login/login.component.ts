@@ -9,7 +9,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserCredentials } from 'src/app/shared/model/user-credentials';
-import { JwtToken } from 'src/app/shared/model/jwt-token';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
@@ -40,25 +39,13 @@ formSubmit() {
     return;
   }
 
-  const userCredentials: UserCredentials = {
-    email: this.email,
-    password: this.password,
-  };
+    this.authService
+      .authenticate(userCredentials)
+      .subscribe((response) => {
+        console.log(response);
+        this.userService.currentUser = response;
+      });
 
-  this.authService.authenticate(userCredentials).subscribe({
-    next: (jwtToken: JwtToken) => this.successfulLogin(jwtToken),
-    error: () => alert('Neuspješna prijava. Provjerite podatke.'),
-  });
-}
-
-
-  successfulLogin(jwtToken: JwtToken) {
-    localStorage.setItem('token', jwtToken.token);
-    this.userService
-      .getCurrentUser()
-      .subscribe(
-        (currentUser) => (this.userService.currentUser = currentUser)
-      );
     this.router.navigate(['/']);
   }
 }

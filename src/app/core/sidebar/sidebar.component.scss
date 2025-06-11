@@ -42,3 +42,9 @@
 .nav-items > a > mat-icon {
   font-size: 20px;
 }
+
+.logout-btn{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}

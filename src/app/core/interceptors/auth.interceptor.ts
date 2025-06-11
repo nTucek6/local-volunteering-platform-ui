@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment ';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   private apiUrl = `${environment.apiUrl}`;
+  private authUrl = `${environment.authUrl}`;
 
   intercept(
     request: HttpRequest<any>,
@@ -20,20 +21,16 @@ export class AuthInterceptor implements HttpInterceptor {
       !request ||
       !request.url ||
       (request.url.startsWith('http') &&
-        !(this.apiUrl && request.url.startsWith(this.apiUrl)))
+        !(this.apiUrl && request.url.startsWith(this.apiUrl)) &&
+        !(this.authUrl && request.url.startsWith(this.authUrl)))
     ) {
       return next.handle(request);
     }
 
-    // add content type
-    if (!request.headers.has('Content-Type')) {
-      request = request.clone({
-        setHeaders: {
-          'Content-Type': 'application/json',
-        },
-        withCredentials: true,
-      });
-    }
+    request = request.clone({
+      withCredentials: true,
+    });
+
     return next.handle(request);
   }
 }
