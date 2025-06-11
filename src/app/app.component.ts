@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from './shared/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,13 @@ import { Router } from '@angular/router';
   standalone: false,
 })
 export class AppComponent {
+
+  private authService = inject(AuthService)
+
+  ngOnInit(){
+    this.authService.refreshToken().subscribe((response)=>{
+      this.authService.setUser(response);
+      console.log(response)
+    })
+  }
 }

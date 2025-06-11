@@ -58,9 +58,10 @@
         <mat-icon>exit_to_app</mat-icon>{{ "sidebar.logout" | translate }}
       </button>
     </ng-container>
-    <ng-template  #notAuthorized> <button class="logout-btn" (click)="navigateToLogin()" mat-button>
+    <ng-template #notAuthorized>
+      <button class="logout-btn" (click)="navigateToLogin()" mat-button>
         <mat-icon>exit_to_app</mat-icon>{{ "sidebar.login" | translate }}
-      </button></ng-template >
-
+      </button>
+    </ng-template>
   </div>
 </div>

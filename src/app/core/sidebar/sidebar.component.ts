@@ -26,7 +26,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 export class SidebarComponent {
   private translate = inject(TranslateService);
 
-  private authService = inject(AuthService);
+  protected authService = inject(AuthService);
 
   private route = inject(Router);
 
@@ -34,14 +34,19 @@ export class SidebarComponent {
 
   selectedLanguage = 'en';
 
-  userId = 1;
+  userId = 0;
 
-  ngOnInit(){
-    this.authService.isAuthorized$.subscribe(status => {
+  ngOnInit() {
+    this.authService.isAuthorized$.subscribe((status) => {
       this.isAuthorized = status;
     });
-  }
 
+    this.authService.user$.subscribe((user)=>{
+      if(user != null)
+      this.userId = user?.id
+    });
+
+  }
 
   onLanguageChange(code: string) {
     this.translate.use(code);

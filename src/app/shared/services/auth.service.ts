@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment ';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { UserCredentials } from '../model/user-credentials';
+import { UserDto } from '../dto/user.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -12,30 +13,35 @@ export class AuthService {
 
   private http: HttpClient = inject(HttpClient);
 
-  private authorized = new BehaviorSubject<boolean>(false);
-  isAuthorized$ = this.authorized.asObservable();
+  private authorizedSubject = new BehaviorSubject<boolean>(false);
+  isAuthorized$ = this.authorizedSubject.asObservable();
 
-  authenticate(userCredentials: UserCredentials): Observable<void> {
+  private userSubject = new BehaviorSubject<UserDto | null>(null);
+  user$ = this.userSubject.asObservable();
+
+  authenticate(userCredentials: UserCredentials): Observable<UserDto> {
     return this.http
-      .post<void>(`${this.apiUrl}/login`, userCredentials)
-      .pipe(tap(() => this.setAuthorized(true)));
+      .post<UserDto>(`${this.apiUrl}/login`, userCredentials)
+      .pipe(tap(() => this.authorizedSubject.next(true)));
   }
 
-  refreshToken(): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/refreshToken`, null).pipe(
-      tap(()=>this.setAuthorized(false))
-    );
+  refreshToken(): Observable<UserDto> {
+    return this.http
+      .post<UserDto>(`${this.apiUrl}/refreshToken`, null)
+      .pipe(tap(() => this.authorizedSubject.next(true)));
   }
 
   logout(): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/logout`, null);
+    return this.http
+      .post<void>(`${this.apiUrl}/logout`, null)
+      .pipe(tap(() => this.authorizedSubject.next(false)));
   }
 
-  setAuthorized(status: boolean): void {
-    this.authorized.next(status);
+  setUser(user: UserDto): void {
+    this.userSubject.next(user);
   }
 
-  getAuthorized(): boolean {
-    return this.authorized.value;
+  setAuthorized(flag: boolean) {
+    this.authorizedSubject.next(flag);
   }
 }
