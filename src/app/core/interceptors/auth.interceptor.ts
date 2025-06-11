@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment ';
 
 @Injectable()
-export class AuthExpiredInterceptor implements HttpInterceptor {
+export class AuthInterceptor implements HttpInterceptor {
   private apiUrl = `${environment.apiUrl}`;
 
   intercept(
