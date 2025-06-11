@@ -33,18 +33,21 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
 
-formSubmit() {
-  if (!this.email.trim() || !this.password.trim()) {
-    alert('Molimo unesite email i lozinku.');
-    return;
-  }
+  formSubmit() {
+    if (!this.email.trim() || !this.password.trim()) {
+      alert('Molimo unesite email i lozinku.');
+      return;
+    }
 
-    this.authService
-      .authenticate(userCredentials)
-      .subscribe((response) => {
-        console.log(response);
-        this.userService.currentUser = response;
-      });
+    const userCredentials: UserCredentials = {
+      email: this.email,
+      password: this.password,
+    };
+
+    this.authService.authenticate(userCredentials).subscribe((response) => {
+      console.log(response);
+      this.userService.currentUser = response;
+    });
 
     this.router.navigate(['/']);
   }
