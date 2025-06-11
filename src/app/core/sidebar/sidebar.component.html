@@ -37,19 +37,13 @@
       ></mat-icon
       >{{ "sidebar.new_event" | translate }}</a
     >
-
-    <!--  <div class="nav-items">
-      <button (click)="onLanguageChange('hr')" mat-button>
-        {{ "language.croatian" | translate }}
-      </button>
-      <button (click)="onLanguageChange('en')" mat-button>
-        {{ "language.english" | translate }}
-      </button>
-    </div>
-    -->
     <mat-form-field class="form-group">
       <mat-label>{{ "language.title" | translate }}</mat-label>
-      <mat-select (valueChange)="onLanguageChange($event)" name="language" [(ngModel)]="selectedLanguage">
+      <mat-select
+        (valueChange)="onLanguageChange($event)"
+        name="language"
+        [(ngModel)]="selectedLanguage"
+      >
         <mat-option value="en"
           >{{ "language.english" | translate }}
         </mat-option>
@@ -59,6 +53,14 @@
       </mat-select>
     </mat-form-field>
 
-    <button class="logout-btn" (click)="onLogout()" mat-button><mat-icon>exit_to_app</mat-icon>{{ "sidebar.logout" | translate }}</button>
+    <ng-container *ngIf="isAuthorized; else notAuthorized">
+      <button class="logout-btn" (click)="onLogout()" mat-button>
+        <mat-icon>exit_to_app</mat-icon>{{ "sidebar.logout" | translate }}
+      </button>
+    </ng-container>
+    <ng-template  #notAuthorized> <button class="logout-btn" (click)="navigateToLogin()" mat-button>
+        <mat-icon>exit_to_app</mat-icon>{{ "sidebar.login" | translate }}
+      </button></ng-template >
+
   </div>
 </div>

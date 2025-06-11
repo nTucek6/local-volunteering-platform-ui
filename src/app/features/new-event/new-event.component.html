@@ -115,7 +115,7 @@
         matInput
         [matDatepicker]="picker"
         required
-        [(ngModel)]="selectedDate"
+        [(ngModel)]="selectedDateTime"
         #dateRef="ngModel"
         [ngModelOptions]="{ standalone: true }"
       />
@@ -133,7 +133,7 @@
         matInput
         [matTimepicker]="timepicker"
         required
-        [(ngModel)]="selectedTime"
+        [(ngModel)]="selectedDateTime"
         #timeRef="ngModel"
         autocomplete="auto"
         [ngModelOptions]="{ standalone: true }"

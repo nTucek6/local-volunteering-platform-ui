@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
@@ -28,9 +28,20 @@ export class SidebarComponent {
 
   private authService = inject(AuthService);
 
+  private route = inject(Router);
+
+  isAuthorized = false;
+
   selectedLanguage = 'en';
 
   userId = 1;
+
+  ngOnInit(){
+    this.authService.isAuthorized$.subscribe(status => {
+      this.isAuthorized = status;
+    });
+  }
+
 
   onLanguageChange(code: string) {
     this.translate.use(code);
@@ -40,5 +51,9 @@ export class SidebarComponent {
     this.authService.logout().subscribe((response) => {
       console.log(response);
     });
+  }
+
+  navigateToLogin() {
+    this.route.navigate(['/login']);
   }
 }

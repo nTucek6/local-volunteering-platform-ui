@@ -21,6 +21,7 @@
     "settings": "Settings",
     "profile": "Profile",
     "new_event": "New event",
+    "login":"Log in",
     "logout": "Logout"
   },
 
