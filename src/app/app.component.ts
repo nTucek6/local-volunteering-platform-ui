@@ -17,5 +17,5 @@ export class AppComponent {
       this.authService.setUser(response);
       console.log(response)
     })
-  }
+  } 
 }

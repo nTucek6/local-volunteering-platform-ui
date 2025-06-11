@@ -52,11 +52,11 @@ const routes: Routes = [
   {
     path: '',
     component: AuthLayoutComponent,
-    canActivate: [authGuard],
     children: [
       {
         path: 'login',
         title: 'Login',
+        canActivate: [authGuard],
         loadComponent: () =>
           import('./features/auth/login/login.component').then(
             (m) => m.LoginComponent
@@ -65,6 +65,7 @@ const routes: Routes = [
       {
         path: 'register',
         title: 'Register',
+        canActivate: [authGuard],
         loadComponent: () =>
           import('./features/auth/register/register.component').then(
             (m) => m.RegisterComponent

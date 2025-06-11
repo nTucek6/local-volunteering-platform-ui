@@ -21,22 +21,25 @@
   </div>
   <div class="nav-items">
     <h5 class="nav-items-title">{{ "sidebar.settings" | translate }}</h5>
-    <a [routerLink]="`/profile/${userId}`"
-      ><mat-icon
-        aria-hidden="false"
-        aria-label="Person icon"
-        fontIcon="person"
-      ></mat-icon
-      >{{ "sidebar.profile" | translate }}</a
-    >
-    <a routerLink="/new-event/"
-      ><mat-icon
-        aria-hidden="false"
-        aria-label="Person icon"
-        fontIcon="person"
-      ></mat-icon
-      >{{ "sidebar.new_event" | translate }}</a
-    >
+    <ng-container *ngIf="isAuthorized">
+      <a [routerLink]="`/profile/${userId}`"
+        ><mat-icon
+          aria-hidden="false"
+          aria-label="Person icon"
+          fontIcon="person"
+        ></mat-icon
+        >{{ "sidebar.profile" | translate }}</a
+      >
+      <a routerLink="/new-event/"
+        ><mat-icon
+          aria-hidden="false"
+          aria-label="Person icon"
+          fontIcon="person"
+        ></mat-icon
+        >{{ "sidebar.new_event" | translate }}</a
+      >
+    </ng-container>
+
     <mat-form-field class="form-group">
       <mat-label>{{ "language.title" | translate }}</mat-label>
       <mat-select

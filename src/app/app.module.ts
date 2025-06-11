@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +16,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AuthExpiredInterceptor } from './core/interceptors/auth-expired-interceptor';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { AuthService } from './shared/services/auth.service';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -41,17 +42,16 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
-    //kad cookie se slozi onda
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthExpiredInterceptor,
       multi: true,
     },
-      {
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
-    }, 
+    },
   ],
 })
 export class AppModule {}

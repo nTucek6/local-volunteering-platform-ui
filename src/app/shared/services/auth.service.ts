@@ -44,4 +44,7 @@ export class AuthService {
   setAuthorized(flag: boolean) {
     this.authorizedSubject.next(flag);
   }
+  getAuthorized(): boolean {
+    return this.authorizedSubject.getValue();
+  }
 }
