@@ -73,8 +73,8 @@ export class SearchEventsComponent {
 
   selectedLocation: string = '';
   selectedCategory?: EventCategory;
-  selectedDateFrom: Date = new Date();
-  selectedDateTo: Date = new Date();
+  selectedDateFrom?: Date;
+  selectedDateTo?: Date;
   selectedTitle: string = '';
 
 
@@ -90,6 +90,8 @@ export class SearchEventsComponent {
       category: this.selectedCategory,
       location: this.selectedLocation,
       title: this.selectedTitle,
+      startDateTimeFrom: this.selectedDateFrom,
+      startDateTimeTo: this.selectedDateTo,
     };
 
     if (this.userId != undefined) {

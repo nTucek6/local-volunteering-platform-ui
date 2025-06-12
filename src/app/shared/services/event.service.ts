@@ -29,6 +29,13 @@ export class EventService {
     ascending?: boolean,
     sortBy?: string
   ): Observable<SearchEventDto[]> {
+    const pad = (n: number) => n.toString().padStart(2, '0');
+
+    const formatLocalDateTime = (d: Date) =>
+      `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(
+        d.getHours()
+      )}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+
     let params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
@@ -42,7 +49,12 @@ export class EventService {
     if (eventFilterParams != undefined) {
       Object.entries(eventFilterParams).forEach(([key, value]) => {
         if (value !== undefined && value !== null) {
-          params = params.set(key, value.toString());
+          if (key === 'startDateTimeFrom' || key === 'startDateTimeTo') {
+            const dateObj = new Date(value);
+            params = params.set(key, formatLocalDateTime(dateObj));
+          } else {
+            params = params.set(key, value.toString());
+          }
         }
       });
     }
