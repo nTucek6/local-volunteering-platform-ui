@@ -1,6 +1,7 @@
 import {
   HttpEvent,
   HttpHandler,
+  HttpHeaders,
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
@@ -27,7 +28,12 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(request);
     }
 
+    const headers = new HttpHeaders({
+      Accept: 'application/json',
+    });
+
     request = request.clone({
+      headers: headers,
       withCredentials: true,
     });
 
