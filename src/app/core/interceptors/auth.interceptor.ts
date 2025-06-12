@@ -29,7 +29,6 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json; charset=utf-8',
        'Accept': 'application/json',
     });
 
