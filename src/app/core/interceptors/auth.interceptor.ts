@@ -1,12 +1,14 @@
 import {
+  HttpErrorResponse,
   HttpEvent,
   HttpHandler,
   HttpHeaders,
   HttpInterceptor,
   HttpRequest,
+  HttpResponse,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, pipe, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment ';
 
 @Injectable()
@@ -28,10 +30,20 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(request);
     }
 
+    const headers = new HttpHeaders({
+      Accept: 'application/json',
+    });
+
     request = request.clone({
+      headers: headers,
       withCredentials: true,
     });
 
-    return next.handle(request);
+    return next.handle(request).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error("Global HTTP Error:", error);
+        return throwError(() => error);
+      })
+    );
   }
 }
