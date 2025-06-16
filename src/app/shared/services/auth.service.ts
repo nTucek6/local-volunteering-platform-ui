@@ -40,6 +40,17 @@ export class AuthService {
     );
   }
 
+  isUserAdmin(): Observable<boolean> {
+    return this.user$.pipe(
+      map((user) => {
+        if (user) {
+          return user.role === 'ADMIN';
+        }
+        return false;
+      })
+    );
+  }
+
   logout(): Observable<void> {
     return this.http
       .post<void>(`${this.apiUrl}/logout`, null)
