@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainLayoutComponent } from './core/layouts/main-layout/main-layout.component';
 import { AuthLayoutComponent } from './core/layouts/auth-layout/auth-layout.component';
 import { authGuard } from './core/guards/authGuard/auth-guard.guard';
+import { AdminAuthGuard } from './core/guards/authGuard/admin-auth-guard';
 
 const routes: Routes = [
   {
@@ -47,6 +48,15 @@ const routes: Routes = [
             (m) => m.NewEventComponent
           ),
       },
+      {
+        path: 'admin-panel',
+        title: 'Admin Panel',
+        canActivate: [AdminAuthGuard],
+        loadComponent: () =>
+          import('./features/admin-panel/admin-panel.component').then(
+            (m) => m.AdminPanelComponent
+          ),
+      },
     ],
   },
   {
@@ -70,7 +80,7 @@ const routes: Routes = [
           import('./features/auth/register/register.component').then(
             (m) => m.RegisterComponent
           ),
-      },
+      }
     ],
   },
 ];

@@ -38,6 +38,14 @@
         ></mat-icon
         >{{ "sidebar.new_event" | translate }}</a
       >
+      <a *ngIf="showStatistics() | async" routerLink="/admin-panel">
+        <mat-icon 
+          aria-hidden="false" 
+          aria-label="Admin Panel icon" 
+          fontIcon="admin_panel_settings">
+        </mat-icon>
+        {{ "sidebar.admin_panel" | translate }}
+      </a>
     </ng-container>
 
     <mat-form-field class="form-group">

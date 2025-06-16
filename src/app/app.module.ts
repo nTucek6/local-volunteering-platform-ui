@@ -17,6 +17,11 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AuthExpiredInterceptor } from './core/interceptors/auth-expired-interceptor';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { AuthService } from './shared/services/auth.service';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
+import { AdminPanelComponent } from './features/admin-panel/admin-panel.component';
+import { AdminAuthGuard } from './core/guards/authGuard/admin-auth-guard';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -31,6 +36,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     SidebarComponent,
     BrowserAnimationsModule,
     MatSidenavModule,
+    CommonModule,
+    MatCardModule,
+    MatTableModule,
+    AdminPanelComponent,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

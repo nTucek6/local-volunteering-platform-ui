@@ -8,6 +8,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { catchError, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
@@ -60,5 +62,17 @@ export class SidebarComponent {
 
   navigateToLogin() {
     this.route.navigate(['/login']);
+  }
+
+  showStatistics(): Observable<boolean> {
+    return this.authService.isUserAdmin().pipe(
+        map(isAdmin => {
+            if (isAdmin) {
+                return true;
+            } else {
+                return false;
+            }
+        }),
+    );
   }
 }
