@@ -2,10 +2,10 @@
   <div id="top-background"></div>
   <div class="profile-content">
     <div class="profile-image">
-      <img src="https://randomuser.me/api/portraits/men/1.jpg" />
+      <img [src]="user?.profilePicturePath" />
       <div>
-        <h3>Full name</h3>
-        <p>User name</p>
+        <h3>{{ user?.name }} {{ user?.surname }}</h3>
+        <p>{{ user?.username }}</p>
       </div>
     </div>
 
@@ -20,18 +20,18 @@
         <h1>{{ "profile.personal_contact_info" | translate }}</h1>
         <div class="data-table">
           <p>{{ "profile.location" | translate }}</p>
-          <p>Data</p>
+          <p>Zagreb</p>
         </div>
         <div class="data-table">
           <p>{{ "profile.contact_email" | translate }}</p>
-          <p>Data</p>
+          <p>{{ user?.email }}</p>
         </div>
       </div>
 
       <div class="bio-info">
         <h1>{{ "profile.bio" | translate }}</h1>
         <div class="data-table">
-          <p>Some bio.....</p>
+          <p>{{ user?.bio }}</p>
         </div>
         <div class="data-table">
           <p>{{ "profile.current_status" | translate }}</p>
@@ -42,12 +42,17 @@
 
     <section class="events">
       <h3>{{ "profile.volunteer_history" | translate }}</h3>
-      <div class="events-list">
-        <ng-container>
-          <img src="https://randomuser.me/api/portraits/men/1.jpg" />
-          <div>
-            <h4>Naslov - 12.6.2025 12:00</h4>
-            <p>Zagreb - Zapruđe</p>
+      <div>
+        <ng-container *ngFor="let event of myPastEvents">
+          <div class="events-list">
+            <img src="https://randomuser.me/api/portraits/men/1.jpg" />
+            <div>
+              <h4>
+                {{ event.title }} -
+                {{ event.startDateTime | date : "dd/MM/yyyy HH:mm:ss" }}
+              </h4>
+              <p>{{ event.location }}</p>
+            </div>
           </div>
         </ng-container>
       </div>
@@ -55,12 +60,17 @@
 
     <section class="events">
       <h3>{{ "profile.my_events" | translate }}</h3>
-      <div class="events-list">
-        <ng-container>
-          <img src="https://randomuser.me/api/portraits/men/1.jpg" />
-          <div>
-            <h4>Naslov - 12.6.2025 12:00</h4>
-            <p>Zagreb - Zapruđe</p>
+      <div>
+        <ng-container *ngFor="let event of myEvents">
+          <div class="events-list">
+            <img src="https://randomuser.me/api/portraits/men/1.jpg" />
+            <div>
+              <h4>
+                {{ event.title }} -
+                {{ event.startDateTime | date : "dd/MM/yyyy HH:mm:ss" }}
+              </h4>
+              <p>{{ event.location }}</p>
+            </div>
           </div>
         </ng-container>
       </div>
