@@ -24,6 +24,7 @@ import { EventFilterParams } from 'src/app/shared/model/event-filter-params';
 import { EventService } from 'src/app/shared/services/event.service';
 import { MatIcon } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
+import {PageEvent, MatPaginatorModule} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-search',
@@ -43,6 +44,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MatTimepickerModule,
     MatIcon,
     TranslateModule,
+    MatPaginatorModule,
   ],
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
@@ -61,7 +63,8 @@ export class SearchComponent {
   eventsDto: SearchEventDto[] = [];
 
   page: number = 0;
-  size: number = 10;
+  size: number = 5;
+  length: number = 10;
   ascending: boolean = false;
 
   displayedColumns: string[] = [
@@ -117,4 +120,14 @@ export class SearchComponent {
   clearCategory() {
     this.selectedCategory = undefined;
   }
+
+
+  handlePageEvent(e: PageEvent) {
+   // this.pageEvent = e;
+    //this.length = e.length;
+    this.size = e.pageSize;
+    this.page = e.pageIndex;
+    this.formSubmit();
+  }
+
 }
