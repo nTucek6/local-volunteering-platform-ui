@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment ';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { BehaviorSubject, catchError, map, Observable, of, tap, throwError } from 'rxjs';
 import { UserCredentials } from '../model/user-credentials';
 import { UserDto } from '../dto/user.dto';
 
@@ -22,7 +22,14 @@ export class AuthService {
   authenticate(userCredentials: UserCredentials): Observable<UserDto> {
     return this.http
       .post<UserDto>(`${this.apiUrl}/login`, userCredentials)
-      .pipe(tap(() => this.authorizedSubject.next(true)));
+      .pipe(
+        tap(() => this.authorizedSubject.next(true)), 
+        catchError((error: HttpErrorResponse) => {
+        alert(error.error);
+        return throwError(() => error);
+      }));
+
+     
   }
 
   refreshToken(): Observable<UserDto> {

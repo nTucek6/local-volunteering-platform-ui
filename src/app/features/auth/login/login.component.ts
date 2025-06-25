@@ -47,8 +47,7 @@ export class LoginComponent {
     this.authService.authenticate(userCredentials).subscribe((response) => {
       console.log(response);
       this.authService.setUser(response);
+      this.router.navigate(['/']);
     });
-
-    this.router.navigate(['/']);
   }
 }
