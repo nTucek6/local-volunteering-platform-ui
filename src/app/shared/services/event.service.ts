@@ -7,7 +7,7 @@ import { EventFilterParams } from '../model/event-filter-params';
 
 import { environment } from 'src/environments/environment ';
 import { HomePageDto, HomePageResponse } from '../dto/home-page.dto';
-import { SearchEventDto } from '../dto/search-event.dto';
+import { SearchEventDto, SearchPageResponse } from '../dto/search-event.dto';
 import { NewEventDto } from '../dto/new-event.dto';
 
 @Injectable({
@@ -28,7 +28,7 @@ export class EventService {
     eventFilterParams?: EventFilterParams,
     ascending?: boolean,
     sortBy?: string
-  ): Observable<SearchEventDto[]> {
+  ): Observable<SearchPageResponse> {
     const pad = (n: number) => n.toString().padStart(2, '0');
 
     const formatLocalDateTime = (d: Date) =>
@@ -58,7 +58,7 @@ export class EventService {
         }
       });
     }
-    return this.http.get<SearchEventDto[]>(`${this.apiUrl}`, { params });
+    return this.http.get<SearchPageResponse>(`${this.apiUrl}`, { params });
   }
 
   getEventsForHomePage(): Observable<HomePageResponse> {

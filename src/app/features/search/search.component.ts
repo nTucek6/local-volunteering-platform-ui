@@ -64,7 +64,7 @@ export class SearchComponent {
 
   page: number = 0;
   size: number = 5;
-  length: number = 10;
+  length: number = 0;
   ascending: boolean = false;
 
   displayedColumns: string[] = [
@@ -108,7 +108,11 @@ export class SearchComponent {
         this.ascending
       )
       .subscribe((response) => {
-        this.eventsDto = [...response];
+        const firstKey : number = Number.parseInt(Object.keys(response)[0]);
+        this.length = firstKey;
+        this.eventsDto = response[firstKey];
+
+        //this.eventsDto = [...response];
         this.cdr.markForCheck();
       });
   }

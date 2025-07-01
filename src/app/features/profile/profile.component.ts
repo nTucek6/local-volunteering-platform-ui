@@ -39,8 +39,8 @@ export class ProfileComponent {
         this.userService.getUserById(userId).subscribe((response) => {
           this.user = response;
           console.log(this.user);
-          this.getMyEvents()
-          this.getMyPastEvents()
+          this.getMyEvents();
+          this.getMyPastEvents();
         });
       }
     });
@@ -58,30 +58,29 @@ export class ProfileComponent {
     this.eventService
       .getAllEvents(0, 5, eventFilterParams, false)
       .subscribe((response) => {
-        this.myEvents = response;
-        console.log(this.myEvents)
+        const firstKey: number = Number.parseInt(Object.keys(response)[0]);
+        this.myEvents = response[firstKey];
+        // this.myEvents = response;
+        console.log(this.myEvents);
       });
   }
 
   getMyPastEvents() {
-    const yesterday = new Date()
+    const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
-    yesterday.setHours(0,0,0,0)
+    yesterday.setHours(0, 0, 0, 0);
 
     const eventFilterParams: EventFilterParams = {
       startDateTimeTo: yesterday,
     };
 
     if (this.id != null) {
-         this.userService
-      .getUserVolunteerHistory(Number(this.id))
-      .subscribe((response) => {
-        this.myPastEvents = response;
-        console.log(this.myEvents)
-      });
+      this.userService
+        .getUserVolunteerHistory(Number(this.id))
+        .subscribe((response) => {
+          this.myPastEvents = response;
+          console.log(this.myEvents);
+        });
     }
-
-
   }
-
 }

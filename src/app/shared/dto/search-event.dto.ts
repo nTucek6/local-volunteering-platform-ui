@@ -9,3 +9,8 @@ export type SearchEventDto = {
   creatorId: number;
   creatorProfileImageURL: string;
 };
+
+
+export type SearchPageResponse = {
+  [key: number]: SearchEventDto[];
+}
