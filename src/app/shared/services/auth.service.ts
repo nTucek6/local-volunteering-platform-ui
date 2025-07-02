@@ -1,7 +1,15 @@
 import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment ';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { BehaviorSubject, catchError, map, Observable, of, tap, throwError } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  map,
+  Observable,
+  of,
+  tap,
+  throwError,
+} from 'rxjs';
 import { UserCredentials } from '../model/user-credentials';
 import { UserDto } from '../dto/user.dto';
 
@@ -23,13 +31,12 @@ export class AuthService {
     return this.http
       .post<UserDto>(`${this.apiUrl}/login`, userCredentials)
       .pipe(
-        tap(() => this.authorizedSubject.next(true)), 
+        tap(() => this.authorizedSubject.next(true)),
         catchError((error: HttpErrorResponse) => {
-        alert(error.error);
-        return throwError(() => error);
-      }));
-
-     
+          alert(error.error);
+          return throwError(() => error);
+        })
+      );
   }
 
   refreshToken(): Observable<UserDto> {
@@ -42,7 +49,7 @@ export class AuthService {
     return this.http.get<UserDto>(`${this.apiUrl}/me`).pipe(
       map(() => true),
       catchError((err) => {
-        return of(false)
+        return of(false);
       })
     );
   }
@@ -66,6 +73,10 @@ export class AuthService {
 
   setUser(user: UserDto): void {
     this.userSubject.next(user);
+  }
+
+  getUserId() {
+    return this.userSubject.getValue()?.id;
   }
 
   setAuthorized(flag: boolean) {

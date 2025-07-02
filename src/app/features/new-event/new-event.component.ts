@@ -20,6 +20,7 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { EventService } from 'src/app/shared/services/event.service';
 import { NewEventDto } from 'src/app/shared/dto/new-event.dto';
 import { TranslateModule } from '@ngx-translate/core';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-new-event',
@@ -43,6 +44,7 @@ export class NewEventComponent {
   @ViewChild('autosize') autosize: CdkTextareaAutosize | undefined;
 
   private eventService = inject(EventService);
+  private authService = inject(AuthService);
 
   selectedImages: File[] = [];
   imagePreviews: string[] = [];
@@ -112,23 +114,29 @@ export class NewEventComponent {
       return;
     }
 
-    const newEventDTO: NewEventDto = {
-      category: this.selectedCategory,
-      title: this.selectedTitle,
-      description: this.selectedDescription,
-      details: this.selectedDetails,
-      location: this.selectedLocation,
-      address: this.selectedAddress,
-      startDateTime: this.selectedDateTime,
-      creatorId: 1,
-      images: this.selectedImages,
-    };
+    const userId = this.authService.getUserId();
+    if (userId != undefined) {
+      const newEventDTO: NewEventDto = {
+        category: this.selectedCategory,
+        title: this.selectedTitle,
+        description: this.selectedDescription,
+        details: this.selectedDetails,
+        location: this.selectedLocation,
+        address: this.selectedAddress,
+        startDateTime: this.selectedDateTime,
+        creatorId: userId,
+        images: this.selectedImages,
+      };
 
-    console.log(newEventDTO);
-
-    this.eventService.createEvent(newEventDTO).subscribe((response) => {
-      console.log(response);
-      alert('Događaj je uspješno kreiran.');
-    });
+      this.eventService.createEvent(newEventDTO).subscribe({
+        next: (response) => {
+          alert('Događaj je uspješno kreiran.');
+        },
+        error: (error) => {
+          alert('Došlo je do greške prilikom kreiranja događaja.');
+          console.error('Error creating event:', error);
+        },
+      });
+    }
   }
 }

@@ -1,9 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-import { RouterOutlet } from '@angular/router';
-import { RouterLinkActive } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { UserService } from 'src/app/shared/services/user.service';
 import { UserDto } from 'src/app/shared/dto/user.dto';
@@ -11,10 +8,11 @@ import { EventService } from 'src/app/shared/services/event.service';
 import { EventFilterParams } from 'src/app/shared/model/event-filter-params';
 import { EventDTO } from 'src/app/shared/dto/event.dto';
 import { SearchEventDto } from 'src/app/shared/dto/search-event.dto';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslateModule, MatButtonModule],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
@@ -38,7 +36,6 @@ export class ProfileComponent {
         const userId: number = Number(this.id);
         this.userService.getUserById(userId).subscribe((response) => {
           this.user = response;
-          console.log(this.user);
           this.getMyEvents();
           this.getMyPastEvents();
         });
@@ -60,8 +57,6 @@ export class ProfileComponent {
       .subscribe((response) => {
         const firstKey: number = Number.parseInt(Object.keys(response)[0]);
         this.myEvents = response[firstKey];
-        // this.myEvents = response;
-        console.log(this.myEvents);
       });
   }
 
@@ -79,8 +74,18 @@ export class ProfileComponent {
         .getUserVolunteerHistory(Number(this.id))
         .subscribe((response) => {
           this.myPastEvents = response;
-          console.log(this.myEvents);
         });
     }
   }
+
+  deleteEvent(eventId : number){
+  
+    this.eventService.deleteEvent(eventId).subscribe((resposne) => {
+     const eventIndex = this.myEvents.findIndex(x=> x.id == eventId);
+     this.myEvents.splice(eventIndex, 1);
+     alert("Event deleted succesfully!");
+    }); 
+
+  }
+
 }

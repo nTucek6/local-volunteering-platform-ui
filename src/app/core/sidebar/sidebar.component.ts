@@ -57,6 +57,7 @@ export class SidebarComponent {
   onLogout() {
     this.authService.logout().subscribe((response) => {
       console.log(response);
+      this.route.navigate(['/'])
     });
   }
 

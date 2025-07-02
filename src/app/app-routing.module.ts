@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainLayoutComponent } from './core/layouts/main-layout/main-layout.component';
 import { AuthLayoutComponent } from './core/layouts/auth-layout/auth-layout.component';
-import { authGuard } from './core/guards/authGuard/auth-guard.guard';
+import { authLoginGuard } from './core/guards/authGuard/auth-login-guard.guard';
 import { AdminAuthGuard } from './core/guards/authGuard/admin-auth-guard';
+import { authGuard } from './core/guards/authGuard/auth-guard';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
       {
         path: 'profile/:id',
         title: 'Profile',
+        canActivate: [authGuard],
         loadComponent: () =>
           import('./features/profile/profile.component').then(
             (m) => m.ProfileComponent
@@ -43,6 +45,7 @@ const routes: Routes = [
       {
         path: 'new-event',
         title: 'New event',
+        canActivate:[authGuard],
         loadComponent: () =>
           import('./features/new-event/new-event.component').then(
             (m) => m.NewEventComponent
@@ -66,7 +69,7 @@ const routes: Routes = [
       {
         path: 'login',
         title: 'Login',
-        canActivate: [authGuard],
+        canActivate: [authLoginGuard],
         loadComponent: () =>
           import('./features/auth/login/login.component').then(
             (m) => m.LoginComponent
@@ -75,7 +78,7 @@ const routes: Routes = [
       {
         path: 'register',
         title: 'Register',
-        canActivate: [authGuard],
+        canActivate: [authLoginGuard],
         loadComponent: () =>
           import('./features/auth/register/register.component').then(
             (m) => m.RegisterComponent
